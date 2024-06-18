@@ -20,10 +20,10 @@ EntityBase {
 //    x:getRandomFloat(_enemyimage.width, _enemyimage.width-20)
     x:getRandomFloat(100, 600)
 
-    Text {
-        id: t
-        text: qsTr("i am enemy")
-    }
+//    Text {
+//        id: t
+//        text: qsTr("i am enemy")
+//    }
 
     BoxCollider{
         id:_enemtycollider
@@ -77,7 +77,7 @@ EntityBase {
 
             duration:getRandomFloat(4000, 10000) // vary animation duration between 2-4 seconds for the 480 px scene width
             onStopped: {
-                console.debug("monster reached base - change to gameover scene because the player lost")
+                console.debug("ennmy reached base")
                 // changeToGameOverScene(false)
             }
         }
@@ -89,7 +89,7 @@ EntityBase {
 
             duration:getRandomFloat(1000, 5000) // vary animation duration between 2-4 seconds for the 480 px scene width
             onStopped: {
-                console.debug("monster reached base - change to gameover scene because the player lost")
+                console.debug("enemy reached base ")
                 // changeToGameOverScene(false)
             }
         }

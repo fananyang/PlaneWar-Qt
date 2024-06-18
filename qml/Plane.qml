@@ -21,10 +21,10 @@ EntityBase {
         width: 50
         height: 50
     }
-    Text {
-        id: t
-        text: qsTr("i am Plane")
-    }
+//    Text {
+//        id: t
+//        text: qsTr("i am Plane")
+//    }
 
     BoxCollider{
         id:_playercntroller

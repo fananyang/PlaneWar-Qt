@@ -21,7 +21,6 @@ set(PRODUCT_STAGE "test")
 # Only used for local builds and Felgo Cloud Builds (https://felgo.com/cloud-builds)
 # Not used if using Felgo Live
 set(PRODUCT_LICENSE_KEY "")
-
 set(FELGO_PLUGINS
 )
 
@@ -35,6 +34,7 @@ list(REMOVE_ITEM AssetsFiles ${QmlFiles})
 qt_add_executable(appplanewar
     main.cpp
     ${QmlFiles}
+
     ${AssetsFiles}
 )
 
