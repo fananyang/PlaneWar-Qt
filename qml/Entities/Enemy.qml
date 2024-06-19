@@ -1,10 +1,13 @@
 import QtQuick 2.15
 import Felgo 4.0
+import QtQuick.Controls 2.15
 
 
 EntityBase {
     id: _enemy
     entityType: "enemy"
+    property alias enemyimage:_enemyimage
+    property alias enemybullet:_enemybullet
 
     property int health :10
     property int score:1
@@ -12,7 +15,7 @@ EntityBase {
 
     Image {
         id: _enemyimage
-        source: Qt.resolvedUrl("../assets/img/small_enemy.png")
+        source: Qt.resolvedUrl("../../assets/img/small_enemy.png")
         anchors.centerIn: parent
         width: 100
         height: 100
@@ -74,8 +77,8 @@ EntityBase {
             id: move_y
             from: 0
             to: 1000 // start at the right side
-
-            duration:getRandomFloat(4000, 10000) // vary animation duration between 2-4 seconds for the 480 px scene width
+            duration: 10000
+            //duration:getRandomFloat(4000, 10000) // vary animation duration between 2-4 seconds for the 480 px scene width
             onStopped: {
                 console.debug("ennmy reached base")
                 // changeToGameOverScene(false)
@@ -93,4 +96,31 @@ EntityBase {
                 // changeToGameOverScene(false)
             }
         }
+    Component{
+        id:_enemybullet
+        Hero_bullet{
+            id:_enemybull
+            x:_enemy.x
+            y:_enemy.y
+            visible: _enemy.visible
+            NumberAnimation on y {
+                    id: y
+                    to: 1000
+                    duration: 5000
+
+                }
+        }
+    }
+
+    Timer {
+        id: t
+        interval: 800 // a new target(=monster) is spawned every second
+        repeat: true
+        running: true
+        onTriggered: {
+            console.log("enemy fire")
+            enemyfire();
+        }
+      }
+    Component.onCompleted:t.start();
 }

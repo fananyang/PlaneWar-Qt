@@ -12,10 +12,12 @@ EntityBase {
     Image {
         id: image
         source: "../../assets/img/enemy_bullet.png"
+        rotation: 90
         anchors.centerIn: parent
         width: boxCollider.width
         height: boxCollider.height
     }
+
 
     function initializeBullet() {
         var rad = entity.rotation / 180 * Math.PI
@@ -28,6 +30,7 @@ EntityBase {
     Component.onCompleted: {
         initializeBullet();
     }
+
 
     property real angleDeg
     property int boom: 1
@@ -72,6 +75,7 @@ EntityBase {
         groupIndex: -2
         body.fixedRotation: true
     }
+
 
 
 }

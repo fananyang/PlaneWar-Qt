@@ -1,7 +1,7 @@
 import Felgo 4.0
-import QtQuick 2.0
-import QtQuick.Controls 2.0
-
+import QtQuick 2.15
+import QtQuick.Controls 2.15
+import "./Entities"
 GameWindow {
     id: gameWindow
     screenWidth: 960
@@ -20,6 +20,8 @@ GameWindow {
 
     Scene{
         id: scene
+        focus: true
+        Keys.forwardTo: planer.twoAxisController
                 // the "logical size" - the scene content is auto-scaled to match the GameWindow size
                 width: 640
                 height: 960
@@ -27,24 +29,21 @@ GameWindow {
                     source:"../assets/img/img_bg_4.jpg";
                     anchors.fill:parent
                 }
-        Plane{
+        Plane {
             id:planer
             anchors.centerIn: parent.Center
             focus: true
             x: parent.width/2-width/2; y: parent.height-50;
-//                   inputActionsToKeyCode: {
-//                       "up": Qt.Key_W,
-//                       "down": Qt.Key_S,
-//                       "left": Qt.Key_A,
-//                       "right": Qt.Key_D,
-//                       "fire": Qt.Key_Space
-//                   }
-        }
-
+            function gobullet(){
+              entityManager.createEntityFromComponent(planer.planebullet)
+            }
         Component{
             id:_enemy
             Enemy{
-                id:enemty
+                id:enemy
+                function enemyfire(){
+                    entityManager.createEntityFromComponent(enemy.enemybullet)
+                }
             }
         }
 
@@ -73,7 +72,7 @@ GameWindow {
             }
 
         }
-
+    }
 
 
 }

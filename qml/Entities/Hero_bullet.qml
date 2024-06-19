@@ -1,4 +1,4 @@
-import QtQuick 2.0
+import QtQuick 2.15
 import QtQuick.Controls 2.15
 import Felgo 4.0
 
@@ -15,17 +15,17 @@ EntityBase {
         height: boxCollider.height
     }
 
-    function initializeBullet() {
-        var rad = entity.rotation / 180 * Math.PI
+//    function initializeBullet() {
+//        var rad = _entity.rotation / 180 * Math.PI
 
-        var localForward = Qt.point(power * Math.cos(rad), power * Math.sin(rad))
+//        var localForward = Qt.point(power * Math.cos(rad), power * Math.sin(rad))
 
-        boxCollider.body.initializeBullet(localForward, boxCollider.body.getWorldCenter())
-    }
+//        boxCollider.body.initializeBullet(localForward, boxCollider.body.getWorldCenter())
+//    }
 
-    Component.onCompleted: {
-        initializeBullet();
-    }
+//    Component.onCompleted: {
+//        initializeBullet();
+//    }
 
 
 
