@@ -22,6 +22,7 @@ EntityBase {
     }
 //    x:getRandomFloat(_enemyimage.width, _enemyimage.width-20)
     x:getRandomFloat(100, 600)
+    y:getRandomFloat(0,200)
 
 //    Text {
 //        id: t
@@ -76,8 +77,8 @@ EntityBase {
             //from: -monsterImage.height // move the monster to the left side of the screen
             id: move_y
             from: 0
-            to: 1000 // start at the right side
-            duration: 10000
+            to: 10000 // start at the right side
+            duration: 80000
             //duration:getRandomFloat(4000, 10000) // vary animation duration between 2-4 seconds for the 480 px scene width
             onStopped: {
                 console.debug("ennmy reached base")
@@ -105,8 +106,8 @@ EntityBase {
             visible: _enemy.visible
             NumberAnimation on y {
                     id: y
-                    to: 1000
-                    duration: 5000
+                    to: 10000
+                    duration: 50000
 
                 }
         }
