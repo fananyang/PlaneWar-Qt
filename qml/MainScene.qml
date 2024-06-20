@@ -5,21 +5,23 @@ Item{
     id: _mainItem
     //    screenHeight: 767
     //    screenWidth: 512
-    //activeScene: playScene
     property alias gameScene:_gameScene
 
     MenuScene {
         id: _menuScene
-        //        startMenuElement.onClicked: { gameScene.visible = true; menuScene.visible = false }
-        //        exitMenuElement.onClicked: { Qt.quit() }
-
+        width: 640
+        height: 1080
     }
 
 
-        GameScene {
-            id: _gameScene
-            visible: false
-        }
+    GameScene {
+        id: _gameScene
+        visible: false
+
+//        width: 640
+//        height: 1080
+//        anchors.fill: gameWindowAnchorItem
+    }
 
 
 }

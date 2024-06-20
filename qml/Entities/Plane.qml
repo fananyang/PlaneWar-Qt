@@ -32,16 +32,11 @@ EntityBase {
 
     BoxCollider{
         id:_playercntroller
+        width: _image.width
+        height: _image.height
         anchors.centerIn: _image
-        width: 75
-        height: 70
-        groupIndex: -1
-        density: 0.02
-        friction: 0.1
-        restitution: 0.5
-        body.bullet: true
-        body.linearDamping: 10
-        body.angularDamping: 15
+        collisionTestingOnlyMode: true
+
         fixedRotation: true
 
         fixture.onBeginContact: {

@@ -75,6 +75,17 @@ EntityBase {
         groupIndex: -2
         body.fixedRotation: true
     }
+    NumberAnimation on y {
+            //from: -monsterImage.height // move the monster to the left side of the screen
+            id: move_y
+            to: -10000  // start at the right side
+
+            duration:getRandomFloat(100, 5000) // vary animation duration between 2-4 seconds for the 480 px scene width
+            onStopped: {
+//                console.debug("enemy reached base ")
+                // changeToGameOverScene(false)
+            }
+        }
 
 
 

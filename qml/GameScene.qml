@@ -1,7 +1,7 @@
 import QtQuick
 import Felgo
 import QtQuick.Controls
-import "./Entities"
+import "Entities"
 //import "common"
 
 // EMPTY SCENE
@@ -28,85 +28,38 @@ import "./Entities"
 
 Scene{
     id:_playscene
+
+
+//    anchors.fill: parent            //hei ping
+
     EntityManager {
         id: entityManager
-        entityContainer: scene
-    }
-    Rectangle{
-        anchors.fill: parent
-        color: "gray"
-    }
-    Scene{
-        id: scene
-        focus: true
-        Keys.forwardTo: planer.twoAxisController
-
-        width: 640
-        height: 960
-        Background{
-            id:_map
-            anchors.fill: parent
-        }
-
-        Plane {
-            id:planer
-            visible: _playscene.visible
-            anchors.centerIn: parent.Center
-            focus: true
-            x: parent.width/2-width/2; y: parent.height-50;
-            function gobullet(){
-                entityManager.createEntityFromComponent(planer.planebullet)
-            }
-            Component{
-                id:_enemy
-                Enemy{
-                    id:enemy
-                    function enemyfire(){
-                        entityManager.createEntityFromComponent(enemy.enemybullet)
-                    }
-                }
-            }
-            //            MenuScene{
-            //                id : menuscene
-            //            }
-        }
-
+        entityContainer: level
     }
 
-    Timer {
-        id: t1
-        running: _playscene.visible
-        repeat: true
-        interval: 2100
-        onTriggered: {
-            entityManager.createEntityFromComponent(_enemy)
-        }
+    Background{
+//        width: 640
+//        height: 1080              //useless
+        id : _bg
+//        anchors.fill: parent              //useless
+        anchors.horizontalCenter: parent.horizontalCenter;  //xiao guo tong xia
+//        x:parent.width/2
+//        y: parent.height/2            useless
+    }
 
+    Plane{
+        id :plane
+        x:parent.width/2
+        y:parent.height-50
     }
-//    Props {
-//        id:_props
-//        visible: _playscene.visible
-//        anchors.centerIn: parent.Center
-//        focus: true
-//        x: parent.width/2-width/2; y: parent.height-50;
-        Component{
-        id:props
-        Exp_prop{
-            id:prop
-//            function createprops(){
-//                entityManager.createEntityFromComponent(_props.propsImage)
-//                }
-//            }
-        }
-    }
-    Timer {
-        id: t2
-        running: _playscene.visible
-        repeat: true
-        interval: 1200
-        onTriggered: {
-            entityManager.createEntityFromComponent(props)
-        }
 
+    PhysicsWorld{
+        id :physicworld
+        updatesPerSecondForPhysics: 60
     }
+
+    Level{
+        id : level
+    }
+
 }

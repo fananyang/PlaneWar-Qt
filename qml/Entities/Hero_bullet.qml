@@ -25,7 +25,7 @@ EntityBase {
 
 //    Component.onCompleted: {
 //        initializeBullet();
-//   }
+//    }
 
 
 

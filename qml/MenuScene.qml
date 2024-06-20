@@ -62,7 +62,7 @@ import QtQuick.Controls
 
 Scene{
     id: _scene
-//    anchors.fill: parent
+//    anchors.fill: parent          hei ping
 
     Background{
         id:_map
@@ -71,13 +71,11 @@ Scene{
 
     MultiResolutionImage {
         id: _title;
-        //        source: "../assets/img/title.png"
         width: parent.width/2+parent.width/6
         height: parent.height/4
         source: Qt.resolvedUrl("../assets/img/title.png")
-//        anchors.fill: parent
         anchors.horizontalCenter: parent.horizontalCenter
-        y: 100
+        y: 200
     }
 
     Column {
@@ -98,6 +96,15 @@ Scene{
                 _scene.visible = false;
             }
         }
+        MenuElement{
+            id:m_setting
+            width: parent.width*0.7
+            label.text: "Setting"
+            onClicked: {
+
+            }
+        }
+
         MenuElement {
             id: m_exit
             width: parent.width*0.7
