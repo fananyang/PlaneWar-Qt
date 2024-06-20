@@ -43,10 +43,6 @@ Scene{
 
         width: 640
         height: 960
-//        Image {
-//            source:"../assets/img/img_bg_4.jpg";
-//            anchors.fill:parent
-//        }
         Background{
             id:_map
             anchors.fill: parent
@@ -84,6 +80,32 @@ Scene{
         interval: 2100
         onTriggered: {
             entityManager.createEntityFromComponent(_enemy)
+        }
+
+    }
+//    Props {
+//        id:_props
+//        visible: _playscene.visible
+//        anchors.centerIn: parent.Center
+//        focus: true
+//        x: parent.width/2-width/2; y: parent.height-50;
+        Component{
+        id:props
+        Exp_prop{
+            id:prop
+//            function createprops(){
+//                entityManager.createEntityFromComponent(_props.propsImage)
+//                }
+//            }
+        }
+    }
+    Timer {
+        id: t2
+        running: _playscene.visible
+        repeat: true
+        interval: 1200
+        onTriggered: {
+            entityManager.createEntityFromComponent(props)
         }
 
     }

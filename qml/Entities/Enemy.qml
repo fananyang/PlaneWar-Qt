@@ -17,8 +17,8 @@ EntityBase {
         id: _enemyimage
         source: Qt.resolvedUrl("../../assets/img/small_enemy.png")
         anchors.centerIn: parent
-        width: 100
-        height: 100
+        width: 50
+        height: 50
     }
 //    x:getRandomFloat(_enemyimage.width, _enemyimage.width-20)
     x:getRandomFloat(100, 600)
