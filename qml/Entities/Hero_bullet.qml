@@ -9,47 +9,44 @@ EntityBase {
 
     Image {
         id: image
-       source: "../../assets/img/blue_bullet.png"
+        source: "../../assets/img/blue_bullet.png"
         anchors.centerIn: parent
         width: boxCollider.width
         height: boxCollider.height
     }
 
-//    function initializeBullet() {
-//        var rad = _entity.rotation / 180 * Math.PI
+    function initi_alizeBullet() {
+        var rad = _entity.rotation / 180 * Math.PI
 
-//        var localForward = Qt.point(power * Math.cos(rad), power * Math.sin(rad))
+        var localForward = Qt.point(power * Math.cos(rad), power * Math.sin(rad))
 
-//        boxCollider.body.initializeBullet(localForward, boxCollider.body.getWorldCenter())
-//    }
+        boxCollider.body.initializeBullet(localForward, boxCollider.body.getWorldCenter())
+    }
 
-//    Component.onCompleted: {
-//        initializeBullet();
-//    }
+    Component.onCompleted: {
+        initi_alizeBullet();
+    }
 
 
 
     property real angleDeg
     property int boom: 1
-    property alias image:image.source
-    property alias box: boxCollider
     property int power: 1000
 
-   rotation: angleDeg
+    rotation: angleDeg
 
     BoxCollider {
-        id: boxCollider
+        id: _hero_bullet
 
         width: 40
-        height: 5
+        height: 8
 
         anchors.centerIn: parent
 
         density: 0.003
-       friction: 0.4
-       restitution: 0.5
+        friction: 0.4
+        restitution: 0.5
         body.bullet: true
-        groupIndex: -1
         body.fixedRotation: true
 
         fixture.onBeginContact: {
@@ -57,13 +54,13 @@ EntityBase {
             var body = other.getBody();
             var otherEntity = body.target
 
-           var collidingType = otherEntity.entityType
+            var collidingType = otherEntity.entityType
 
-           if(collidingType === "wall") {
+            if(collidingType === "wall") {
                 _entity.removeEntity()
                 return
             }
-           if(collidingType === "enemy") {
+            if(collidingType === "enemy") {
                 entity.removeEntity()
                 return
             }
