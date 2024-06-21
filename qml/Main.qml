@@ -9,9 +9,10 @@ GameWindow {
     screenWidth: 960
     screenHeight: 640
 
+
 //    Component.onCompleted: {
-//        mainItemLoader.source = "MainScene.qml"
-////        mainItemLoader.source = "GameScene.qml"
+////        mainItemLoader.source = "MainScene.qml"
+//        mainItemLoader.source = "GameScene.qml"
 //    }
 
 //    Loader {
@@ -21,5 +22,9 @@ GameWindow {
     MainScene{
         id: mainscene
     }
+
+//    GameScene{
+
+//    }
 
 }

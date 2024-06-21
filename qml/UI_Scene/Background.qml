@@ -15,6 +15,7 @@ Item {
         anchors.horizontalCenter: parent.horizontalCenter
         movementVelocity: Qt.point(0,150)
         sourceImage:bgSource
+        sourceImage2: bgSource
     }
 
 }

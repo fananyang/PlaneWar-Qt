@@ -5,7 +5,7 @@ import QtQuick.Controls 2.15
 
 EntityBase {
     id: _enemy
-    entityType: "enemy"
+    entityType: "Enemy"
 
 
     property int health :10
@@ -20,8 +20,8 @@ EntityBase {
 //    x:sc.x
 //    y:sc.y
 
-//    y:getRandomFloat(0,200)
-//    x:getRandomFloat(0,750)
+    y:getRandomFloat(0,100)
+    x:getRandomFloat(100,480)
 
     BoxCollider{
         id:_enemtycollider
@@ -34,7 +34,7 @@ EntityBase {
         fixedRotation: true
 
         //This handler is called when 2 fixtures start to collide with each other.
-        fixture.onBeginContact: {
+        fixture.onBeginContact:other=> {
             var collderbody = other.getBody();
             var collidedEntity =collderbody.target;
 
@@ -44,15 +44,16 @@ EntityBase {
 
             if( collidedEntity.entityType ==="Plane" ){
                 if(_enemy.visible)
-                    _enemy.health=health-8;
+                    _enemy.health=health-800;
             }
 
             if(collidedEntity.entityType ==="Wall"){
+                                       _enemy.visible=false
                 _enemy.removeEntity();
 
             }
             if(collidedEntity.entityType === "Hero_bullet"){
-                _enemy.health--;
+                _enemy.health-=2;
             }
         }
     }
@@ -60,24 +61,27 @@ EntityBase {
     onHealthChanged: {
         if(health <= 0){
             _enemyimage.visible=false;
-            _enemtycollider.visible=false;
+//            _enemtycollider.visible=false;
+            _enemtycollider.destroy();
+            t.running=false
         }
     }
 
     function getRandomFloat(a, b) {
-        // 确保a不大于b
+        // make sure a <= b
         if (a > b) {
             var temp = a;
             a = b;
             b = temp;
         }
-        // 生成随机数并缩放到指定范围
+
         return Math.random() * (b - a) + a;
     }
+
     NumberAnimation on y {
             //from: -monsterImage.height // move the monster to the left side of the screen
             id: move_y
-            from: 0
+//            from: 0
             to: 10000 // start at the right side
             duration: 80000
             //duration:getRandomFloat(4000, 10000) // vary animation duration between 2-4 seconds for the 480 px scene width
@@ -87,22 +91,23 @@ EntityBase {
             }
         }
 
-    NumberAnimation on x {
-            //from: -monsterImage.height // move the monster to the left side of the screen
-            id: move_x
-            to: getRandomFloat(0, 620)  // start at the right side
+//    NumberAnimation on x {
+//            //from: -monsterImage.height // move the monster to the left side of the screen
+//            id: move_x
+//            to: getRandomFloat(0, 620)  // start at the right side
 
-            duration:getRandomFloat(1000, 5000) // vary animation duration between 2-4 seconds for the 480 px scene width
-            onStopped: {
-                console.debug("enemy reached base ")
-                // changeToGameOverScene(false)
-            }
-        }
+//            duration:getRandomFloat(1000, 5000) // vary animation duration between 2-4 seconds for the 480 px scene width
+//            onStopped: {
+//                console.debug("enemy reached base ")
+//                // changeToGameOverScene(false)
+//            }
+//        }
+
     Component{
         id:_enemybullet
-        Hero_bullet{
+        Enemy_bullet{
             id:_enemybull
-            x:_enemy.x
+            x:_enemy.x+9
             y:_enemy.y
             visible: _enemy.visible
             NumberAnimation on y {
@@ -116,9 +121,9 @@ EntityBase {
 
     Timer {
         id: t
-        interval: 2400 // a new target(=monster) is spawned every second
+        interval: 1000 // a new target(=monster) is spawned every second
         repeat: true
-        running: true
+        running: false
         onTriggered: {
             console.log("enemy fire")
             enemyfire();
@@ -127,7 +132,7 @@ EntityBase {
     Component.onCompleted:t.start();
 
         function enemyfire(){
-                entityManager.createEntityFromComponent(_enemybullet)
+                _manger.createEntityFromComponent(_enemybullet)
             }
 
 }

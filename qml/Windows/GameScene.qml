@@ -5,75 +5,48 @@ import "../Entities"
 import "../UI_Scene"
 
 Scene {
-
     property alias level:_level
 
     property alias sc:_scene
 
+    property alias timecontrol:_level.timeControl
     id:_scene
     focus: true
-    //Keys.forwardTo: planer.twoAxisController
+    Keys.forwardTo: [_level.planer.controller]
 
-//    width: _map.width
-//    height:_map.height
-
-//    Background{
-//        id:_map
-//        anchors.fill: _scene.gameWindowAnchorItem
-//        Component.onCompleted: {
-//            //something to do
-//        }
+//    Component.onCompleted:{
+//        console.log(_scene.focus,_level.planer.controller.focus)
 //    }
+
+//    onFocusChanged: {
+//        console.log("in game scene focus changged",_scene.focus,_level.planer.focus)
+//    }
+
+//        width: _map.width
+//        height:_map.height
 
     EntityManager{
         id:_manger
-        entityContainer: planer
+        entityContainer: _level
     }
 
     Background{
         id:_map
-        anchors.fill: parent
-    }
-
-    Plane {
-        id:planer
-        visible: _scene.visible
-        anchors.centerIn: parent.Center
-        focus: true
-        x: parent.width/2-width/2; y: parent.height-50;
-        function gobullet(){
-            entityManager.createEntityFromComponent(planer.planebullet)
-        }
-
-        Component{
-            id:_enemy
-            Enemy{
-                id:enemy
-                function enemyfire(){
-                    entityManager.createEntityFromComponent(enemy.enemybullet)
-                }
-            }
+        anchors.fill: _scene.gameWindowAnchorItem
+        Component.onCompleted: {
+            //something to do
         }
     }
 
     PhysicsWorld {
         id: world
-        updatesPerSecondForPhysics: 60
+        updatesPerSecondForPhysics: 10
     }
 
     Level{
         id:_level
-    }
-
-
-    Timer {
-        id: t1
-        running: _scene.visible
-        repeat: true
-        interval: 2100
-        onTriggered: {
-            _entityManager.createEntityFromComponent(_enemy)
-        }
 
     }
+
 }
+

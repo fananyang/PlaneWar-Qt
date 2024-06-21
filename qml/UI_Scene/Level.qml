@@ -4,45 +4,57 @@ import QtQuick.Controls
 import "../Entities"
 
 Item {
+    property alias planer:_plane
+    property alias timeControl:alltime
+
     id:_level
     width: parent.width
     height: parent.height
 
-    Rectangle {
-        width: 50
-        height: 50
-        color: "red"
-        visible: false
+    Plane{
+        id:_plane
+        objectName: "Plane"
+        variationType: "Plane"
+        visible: _scene.visible
+//      r  anchors.centerIn: parent.Center
+        focus: true
+        x: parent.width/2-width/2;
+        y: parent.height-50;
+
+        inputActionsToKeyCode: {
+            "up": Qt.Key_D,
+            "down": Qt.Key_A,
+            "left": Qt.Key_W,
+            "right": Qt.Key_S,
+            "fire": Qt.Key_Space
+        }
     }
 
     Component{
-        id: _enemyComponent
-        Enemy {
-            id: _enemy
+        id:mostercreate
+        Enemy{
+
         }
     }
-//    Timer {
-//        id: t
-//        running: false//scene.visible == true && splashFinished // only enable the creation timer, when the gameScene is visible
-//        repeat: true
-//        interval: 1000 // a new target(=monster) is spawned every second
-//        onTriggered:_manger.createEntityFromComponent(_enemyComponent)
-//    }
 
-    Timer {
-        id: timer
-        running: false//scene.visible == true && splashFinished // only enable the creation timer, when the gameScene is visible
+    Timer{
+        id:alltime
+        running: false
+        onTriggered: {
+            timer.running=true
+        }
+    }
+
+    Timer{
+        id:timer
+        interval: 2000
         repeat: true
-        interval: 1000 // a new target(=monster) is spawned every second
-        onTriggered: addTarget()
+        running: false
+        onTriggered: {
+            _manger.createEntityFromComponent(mostercreate)
+        }
+
     }
-
-    function addTarget() {
-        //console.debug("create a new monster")
-
-        _manger.createEntityFromComponent(_enemyComponent)
-    }
-
 
 
     Wall {
@@ -67,7 +79,7 @@ Item {
             left: parent.left
             right: parent.right
             bottom: parent.top
-            bottomMargin: 50
+//            bottomMargin: 50
         }
     }
 
@@ -93,6 +105,6 @@ Item {
         }
 
     }
-    Component.onCompleted: timer.running= true
+//    Component.onCompleted: timer.running= true
 
 }

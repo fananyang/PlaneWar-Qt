@@ -4,15 +4,8 @@ import QtQuick.Controls
 
 Item{
     id: _mainItem
-    //    screenHeight: 767
-    //    screenWidth: 512
-    //activeScene: playScene
+//    activeScene: _gameScene
     property alias gameScene:_gameScene
-
-    EntityManager{
-        id: _entityManager
-//        entityContainer:_gameScene.level
-    }
 
     MenuScene {
         id: _menuScene
@@ -21,14 +14,14 @@ Item{
         column.onClicked: {
             _menuScene.visible=false;
             _gameScene.visible=true;
+            _gameScene.timecontrol.running=true
+             console.log("clicked", _menuScene.visible,_gameScene.visible)
         }
     }
 
-
-        GameScene {
-            id: _gameScene
-            visible: false
-        }
-
+    GameScene {
+        id: _gameScene
+        visible: false
+    }
 
 }

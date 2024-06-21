@@ -16,6 +16,6 @@ EntityBase {
         anchors.fill: parent
         color: "brown"
         // this could be set to true for debugging
-        visible: false
+        visible: true
     }
 }

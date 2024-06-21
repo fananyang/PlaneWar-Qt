@@ -1,8 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 
-
 project(planewar VERSION 0.1 LANGUAGES CXX)
-
 set(CMAKE_AUTOMOC ON)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
@@ -13,6 +11,7 @@ find_package(Felgo REQUIRED)
 set(PRODUCT_IDENTIFIER "com.yourcompany.wizardEVAP.Planewar")
 set(PRODUCT_VERSION_NAME "1.0.0")
 set(PRODUCT_VERSION_CODE 1)
+
 
 # Set either "test" or "publish" stage:
 set(PRODUCT_STAGE "test")
