@@ -17,11 +17,11 @@ EntityBase {
         source: Qt.resolvedUrl("../../assets/img/small_enemy.png")
     }
 
-//    x:sc.x
-//    y:sc.y
+    //    x:sc.x
+    //    y:sc.y
 
-    y:getRandomFloat(0,100)
-    x:getRandomFloat(100,480)
+    //    y:getRandomFloat(0,200)
+    x:getRandomFloat(50,265)  //create position of x
 
     BoxCollider{
         id:_enemtycollider
@@ -35,35 +35,34 @@ EntityBase {
 
         //This handler is called when 2 fixtures start to collide with each other.
         fixture.onBeginContact:other=> {
-            var collderbody = other.getBody();
-            var collidedEntity =collderbody.target;
+                                   var collderbody = other.getBody();
+                                   var collidedEntity =collderbody.target;
 
-            console.log("collided with entity:",collidedEntity.entityType);
+                                   console.log("collided with entity:",collidedEntity.entityType);
 
-            //The collision rules for the enemy aircraft are as follows: when the enemy aircraft is hit, it will disappear or Health reduction .
+                                   //The collision rules for the enemy aircraft are as follows: when the enemy aircraft is hit, it will disappear or Health reduction .
 
-            if( collidedEntity.entityType ==="Plane" ){
-                if(_enemy.visible)
-                    _enemy.health=health-800;
-            }
+                                   if( collidedEntity.entityType ==="Plane" ){
+                                       if(_enemy.visible)
+                                       _enemy.health=health-10;
+                                   }
 
-            if(collidedEntity.entityType ==="Wall"){
-                                       _enemy.visible=false
-                _enemy.removeEntity();
+                                   if(collidedEntity.entityType ==="Wall"){
+                                       _enemy.removeEntity();
+//                                       _enemy.visible=false;
 
-            }
-            if(collidedEntity.entityType === "Hero_bullet"){
-                _enemy.health-=2;
-            }
-        }
+                                   }
+                                   if(collidedEntity.entityType === "Hero_bullet"){
+                                       _enemy.health-=10;
+                                   }
+                               }
     }
 
     onHealthChanged: {
         if(health <= 0){
-            _enemyimage.visible=false;
+//            _enemyimage.visible=false;
 //            _enemtycollider.visible=false;
-            _enemtycollider.destroy();
-            t.running=false
+            _enemy.removeEntity()
         }
     }
 
@@ -79,29 +78,29 @@ EntityBase {
     }
 
     NumberAnimation on y {
-            //from: -monsterImage.height // move the monster to the left side of the screen
-            id: move_y
-//            from: 0
-            to: 10000 // start at the right side
-            duration: 80000
-            //duration:getRandomFloat(4000, 10000) // vary animation duration between 2-4 seconds for the 480 px scene width
-            onStopped: {
-                console.debug("ennmy reached base")
-                // changeToGameOverScene(false)
-            }
+        //from: -monsterImage.height // move the monster to the left side of the screen
+        id: move_y
+        //            from: 0
+        to: 10000 // start at the right side
+        duration: 80000
+        //duration:getRandomFloat(4000, 10000) // vary animation duration between 2-4 seconds for the 480 px scene width
+        onStopped: {
+            console.debug("ennmy reached base")
+            // changeToGameOverScene(false)
         }
+    }
 
-//    NumberAnimation on x {
-//            //from: -monsterImage.height // move the monster to the left side of the screen
-//            id: move_x
-//            to: getRandomFloat(0, 620)  // start at the right side
+    //    NumberAnimation on x {
+    //            //from: -monsterImage.height // move the monster to the left side of the screen
+    //            id: move_x
+    //            to: getRandomFloat(0, 620)  // start at the right side
 
-//            duration:getRandomFloat(1000, 5000) // vary animation duration between 2-4 seconds for the 480 px scene width
-//            onStopped: {
-//                console.debug("enemy reached base ")
-//                // changeToGameOverScene(false)
-//            }
-//        }
+    //            duration:getRandomFloat(1000, 5000) // vary animation duration between 2-4 seconds for the 480 px scene width
+    //            onStopped: {
+    //                console.debug("enemy reached base ")
+    //                // changeToGameOverScene(false)
+    //            }
+    //        }
 
     Component{
         id:_enemybullet
@@ -111,11 +110,11 @@ EntityBase {
             y:_enemy.y
             visible: _enemy.visible
             NumberAnimation on y {
-                    id: y
-                    to: 10000
-                    duration: 50000
+                id: y
+                to: 10000
+                duration: 50000
 
-                }
+            }
         }
     }
 
@@ -128,11 +127,15 @@ EntityBase {
             console.log("enemy fire")
             enemyfire();
         }
-      }
+    }
+
+
+    function enemyfire(){
+        //        _manger.createEntityFromComponent(_enemybullet)
+        var imagePointInWorldCoordinates = mapToItem(level,_enemyimage.x, _enemyimage.y);
+
+        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("Enemy_bullet.qml"), {"x": imagePointInWorldCoordinates.x+20, "y": imagePointInWorldCoordinates.y+40, "rotation": _enemy.rotation+90});
+
+    }
     Component.onCompleted:t.start();
-
-        function enemyfire(){
-                _manger.createEntityFromComponent(_enemybullet)
-            }
-
 }

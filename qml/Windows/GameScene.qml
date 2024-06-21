@@ -6,10 +6,9 @@ import "../UI_Scene"
 
 Scene {
     property alias level:_level
-
+    property alias timercontrol:_level.timecontrol
     property alias sc:_scene
 
-    property alias timecontrol:_level.timeControl
     id:_scene
     focus: true
     Keys.forwardTo: [_level.planer.controller]

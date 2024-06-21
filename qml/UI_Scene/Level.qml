@@ -5,8 +5,7 @@ import "../Entities"
 
 Item {
     property alias planer:_plane
-    property alias timeControl:alltime
-
+    property alias timecontrol:_alltime
     id:_level
     width: parent.width
     height: parent.height
@@ -36,9 +35,8 @@ Item {
 
         }
     }
-
     Timer{
-        id:alltime
+        id:_alltime
         running: false
         onTriggered: {
             timer.running=true
@@ -51,7 +49,8 @@ Item {
         repeat: true
         running: false
         onTriggered: {
-            _manger.createEntityFromComponent(mostercreate)
+//            _manger.createEntityFromComponent(mostercreate)
+            _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Entities/Enemy.qml"), {"y": parent.y+20})
         }
 
     }

@@ -107,9 +107,10 @@ EntityBase {
         property var lastWall: null
 
         fixture.onBeginContact: (other, contactNormal) => {
-                                    var fixture = other;//get fixture
-                                    var body = other.getBody();//get body
-                                    var otherEntity = body.target;//get entity
+                                    var fixture = other;
+                                    var body = other.getBody();
+                                    var otherEntity = body.target
+
                                     // get the entityType of the colliding entity
                                     var collidingType = otherEntity.entityType
 
@@ -121,18 +122,18 @@ EntityBase {
 
                                     if(collidingType === "Wall") {
                                         entity.removeEntity();
-                                        return
                                     }
                                     if(collidingType ==="Enemy"){
-                                        otherEntity.health--;
+                                        otherEntity.health++;
                                         entity.removeEntity();
-                                        return
                                     }
                                     if(collidingType === "Enemy_bullet"){
                                         console.log("pb ----------------------------------------------> eb")
                                         entity.removeEntity();
-                                        return
-
+                                    }
+                                    if(collidingType === "Enemy_bullet"){
+                                        console.log("pb ----------------------------------------------> eb")
+                                        entity.removeEntity();
                                     }
 
                                     //can't hit the same wall twice, but onBeginContact called again after rotation has changed
@@ -157,13 +158,12 @@ EntityBase {
         id: image
         source: Qt.resolvedUrl("../../assets/img/blue_bullet.png")
         anchors.centerIn: parent
-        rotation: 90
-        width: 5
+        width:20
         height:5
     }
 
     function applyForwardImpulse() {
-        var power = 1500
+        var power = 1500             //bullet speed
         var rad = entity.rotation / 180 * Math.PI
 
         //can't use body.toWorldVector() because the rotation is not instantly

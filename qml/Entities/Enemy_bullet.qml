@@ -128,9 +128,9 @@ EntityBase {
         property var lastWall: null
 
         fixture.onBeginContact: (other, contactNormal) => {
-                                    var fixture = other;//get fixture
-                                    var body = other.getBody();//get body
-                                    var otherEntity = body.target;//get entity
+                                    var fixture = other;
+                                    var body = other.getBody();
+                                    var otherEntity = body.target
 
                                     // get the entityType of the colliding entity
                                     var collidingType = otherEntity.entityType
@@ -142,22 +142,16 @@ EntityBase {
                                     //      }
 
                                     if(collidingType === "Wall") {
-                                        image.visible=false
+                                        entity.removeEntity()
+                                    }
+                                    if(collidingType ==="Plane"){
                                         entity.removeEntity()
 
                                     }
-                                    if(collidingType ==="Plane"){
-                                        image.visible=false
-                                        otherEntity.helth-=5
-                                        entity.removeEntity()
-                                        entity.destroy()
-                                    }
-                                    if(collidingType === "Hero_bullet"){
-                                        entity.visible=false
-                                        image.visible=false
+                                    if(collidingType  === "Hero_bullet"){
                                         console.log("eb ---------------------------------------------------------> pb")
-//                                        entity.removeEntity()
-                                        boxCollider.destroy()
+                                        entity.removeEntity();
+
                                     }
 
 
@@ -165,17 +159,17 @@ EntityBase {
 
 
                                     //apply law of reflection, all calculations in degrees
-                                    var normalAngle = 180 / Math.PI * Math.atan2(contactNormal.y, contactNormal.x)
-                                    var angleDiff = normalAngle - entity.rotation
-                                    var newAngle = entity.rotation + 2 * angleDiff + 180
+//                                    var normalAngle = 180 / Math.PI * Math.atan2(contactNormal.y, contactNormal.x)
+//                                    var angleDiff = normalAngle - entity.rotation
+//                                    var newAngle = entity.rotation + 2 * angleDiff + 180
 
                                     // manually set the entity rotation, because it is the target and its rotation will be used for the physics body
-                                    entity.rotation = newAngle
+//                                    entity.rotation = newAngle
 
                                     // it's important to clear the old velocity before applying the impulse, otherwise the rocket would get faster every time it collides with a wall!
-                                    boxCollider.body.linearVelocity = Qt.point(0,0)
+//                                    boxCollider.body.linearVelocity = Qt.point(0,0)
 
-//                                     applyForwardImpulse();
+                                    // applyForwardImpulse();
                                 }
     }
 
@@ -183,13 +177,13 @@ EntityBase {
         id: image
         source: Qt.resolvedUrl("../../assets/img/enemy_bullet.png")
         anchors.centerIn: parent
-        width: 10
-        height:5
+        width: 20
+        height:25
     }
 
     function applyForwardImpulse() {
-        var power = 1500
-        var rad = entity.rotation / 10000 * Math.PI
+        var power = 1000    //bullet speed
+        var rad = entity.rotation / 180 * Math.PI
 
         //can't use body.toWorldVector() because the rotation is not instantly
         var localForward = Qt.point(power * Math.cos(rad), power * Math.sin(rad))

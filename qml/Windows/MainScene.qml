@@ -14,8 +14,8 @@ Item{
         column.onClicked: {
             _menuScene.visible=false;
             _gameScene.visible=true;
-            _gameScene.timecontrol.running=true
-             console.log("clicked", _menuScene.visible,_gameScene.visible)
+             console.log("clicked", _menuScene.visible,_gameScene.visible);
+            _gameScene.timercontrol.running=true;
         }
     }
 
@@ -23,5 +23,14 @@ Item{
         id: _gameScene
         visible: false
     }
+
+    function gameover() {
+         console.log("game over");
+        _menuScene.visible=true;
+        _gameScene.visible=false;
+        _gameScene.timercontrol.running=false;
+         console.log("clicked", _menuScene.visible,_gameScene.visible)
+
+     }
 
 }

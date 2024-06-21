@@ -21,6 +21,7 @@ GameWindow {
 
     MainScene{
         id: mainscene
+
     }
 
 //    GameScene{
