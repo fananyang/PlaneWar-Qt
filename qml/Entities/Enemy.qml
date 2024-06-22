@@ -81,40 +81,12 @@ EntityBase {
         //from: -monsterImage.height // move the monster to the left side of the screen
         id: move_y
         //            from: 0
-        to: 10000 // start at the right side
-        duration: 80000
+        to: 5000 // start at the right side
+        duration: 22000
         //duration:getRandomFloat(4000, 10000) // vary animation duration between 2-4 seconds for the 480 px scene width
         onStopped: {
             console.debug("ennmy reached base")
             // changeToGameOverScene(false)
-        }
-    }
-
-    //    NumberAnimation on x {
-    //            //from: -monsterImage.height // move the monster to the left side of the screen
-    //            id: move_x
-    //            to: getRandomFloat(0, 620)  // start at the right side
-
-    //            duration:getRandomFloat(1000, 5000) // vary animation duration between 2-4 seconds for the 480 px scene width
-    //            onStopped: {
-    //                console.debug("enemy reached base ")
-    //                // changeToGameOverScene(false)
-    //            }
-    //        }
-
-    Component{
-        id:_enemybullet
-        Enemy_bullet{
-            id:_enemybull
-            x:_enemy.x+9
-            y:_enemy.y
-            visible: _enemy.visible
-            NumberAnimation on y {
-                id: y
-                to: 10000
-                duration: 50000
-
-            }
         }
     }
 
@@ -131,7 +103,6 @@ EntityBase {
 
 
     function enemyfire(){
-        //        _manger.createEntityFromComponent(_enemybullet)
         var imagePointInWorldCoordinates = mapToItem(level,_enemyimage.x, _enemyimage.y);
 
         _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("Enemy_bullet.qml"), {"x": imagePointInWorldCoordinates.x+20, "y": imagePointInWorldCoordinates.y+40, "rotation": _enemy.rotation+90});

@@ -1,107 +1,3 @@
-//import QtQuick 2.15
-//import QtQuick.Controls 2.15
-//import Felgo 4.0
-
-
-//EntityBase {
-
-//    id: _playerplane
-//    entityType: "Plane"
-
-
-//    property alias inputActionsToKeyCode: _twoAxisController.inputActionsToKeyCode
-
-//    property int helth:1000
-//    property int defenses:800
-//    property alias controller: _twoAxisController
-
-//    MultiResolutionImage {
-//        id: _planeimage
-//        source: Qt.resolvedUrl("../../assets/img/blue_plane.png")
-
-//        anchors.centerIn: parent
-////        width: boxCollider.width
-////        height: boxCollider.height
-//        width: 75
-//        height: 55
-
-//        property list<Item> imagePoints: [
-//          // this imagePoint can be used for creation of the rocket
-//          // it must be far enough in front of the car that they don't collide upon creation
-//          // the +30 might have to be adapted if the size of the rocket is changed
-//          Item {x: _planeimage.width/2+30}
-//        ]
-//    }
-
-//    BoxCollider{
-//        id:_planecntroller
-//        width: _planeimage.width
-//        height: _planeimage.height
-//        anchors.centerIn: _planeimage
-
-////        density: 0.02     //midu
-////        friction: 0.25
-////        restitution: 0.5
-////        body.bullet: true
-////        body.linearDamping: 10
-////        body.angularDamping: 15
-
-//// fixedRotation: true
-//        collisionTestingOnlyMode: true
-
-//        force: Qt.point(_twoAxisController.yAxis*8000, 0)
-//        torque: _twoAxisController.xAxis*2000
-
-//        fixture.onBeginContact: other =>{
-//            var collderbody = other.getBody();
-//            var collidedPlane =collderbody.target;
-
-//            if(collidedPlane.entityType === "enemy"){
-//                helth--;
-//            }
-//            if(collidedPlane.entityType === "Enemy_bullet"){
-//                helth--;
-//            }
-//        }
-//        Component.onCompleted: {
-//          console.debug("Plane.physics.x:", x)
-//          var mapped = mapToItem(world.debugDraw, x, y)
-//          console.debug("plane.physics.x world:", mapped.x)
-//        }
-
-//    }
-
-//    onHelthChanged: {
-//        if(helth<=0){
-//            _planeimage.visible=false;
-//        }
-//    }
-
-
-//    TwoAxisController {
-//        id: _twoAxisController
-//        inputActionsToKeyCode: actionName => handleInputAction(actionName)
-
-//    }
-
-//    function handleInputAction(action) {
-//      if( action === "fire") {
-//        // x&y of this component are 0..
-//        console.debug("creating weapon at current position x", _playerplane.x, "y", _playerplane.y)
-//        console.debug("image.imagePoints[0].x:", _planeimage.imagePoints[0].x, ", image.imagePoints[0].y:", _planeimage.imagePoints[0].y)
-
-//        // this is the point that we defined in Car.qml for the rocket to spawn
-//        var imagePointInWorldCoordinates = mapToItem(level,_planeimage.imagePoints[0].x, _planeimage.imagePoints[0].y)
-//        console.debug("imagePointInWorldCoordinates x", imagePointInWorldCoordinates.x, " y:", imagePointInWorldCoordinates.y)
-
-//        // create the rocket at the specified position with the rotation of the car that fires it
-//        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("Hero_bullet.qml"), {"x": imagePointInWorldCoordinates.x, "y": imagePointInWorldCoordinates.y, "rotation": _playerplane.rotation})
-
-//      }
-//    }
-
-//}
-
 import QtQuick 2.0
 import Felgo 4.0
 import QtQuick.Controls 2.0
@@ -167,7 +63,7 @@ EntityBase {
 
         //    collisionTestingOnlyMode: true
 
-        density: 0.1
+        density: 0.08
         friction: 0.35
         restitution: 0.5
         body.bullet: true
@@ -178,7 +74,7 @@ EntityBase {
         //fixedRotation: true
 
         // this is applied every physics update tick
-        force: Qt.point(twoAxisController.yAxis*forwardForce+50, twoAxisController.xAxis*forwardForce+100)//move speed
+        force: Qt.point(twoAxisController.yAxis*forwardForce+800, twoAxisController.xAxis*forwardForce+1000)//move speed
         torque: twoAxisController.xAxis*2000 * world.pixelsPerMeter * world.pixelsPerMeter
 
         Component.onCompleted: {
@@ -199,6 +95,9 @@ EntityBase {
                                     }
                                     if(collidingType === "Enemy"){
                                         car.helth-=component.boom
+                                    }
+                                    if(collidingType ==="Helth_props"){
+                                        helth+=getRandomFloat(-5,10);
                                     }
 
                                     //var
@@ -227,6 +126,18 @@ EntityBase {
         if(car.helth <= 0){
             gameover()
         }
+    }
+
+
+    function getRandomFloat(a, b) {
+        // make sure a <= b
+        if (a > b) {
+            var temp = a;
+            a = b;
+            b = temp;
+        }
+
+        return Math.random() * (b - a) + a;
     }
 
 }

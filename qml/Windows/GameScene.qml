@@ -12,17 +12,9 @@ Scene {
     id:_scene
     focus: true
     Keys.forwardTo: [_level.planer.controller]
-
-//    Component.onCompleted:{
-//        console.log(_scene.focus,_level.planer.controller.focus)
-//    }
-
-//    onFocusChanged: {
-//        console.log("in game scene focus changged",_scene.focus,_level.planer.focus)
-//    }
-
-//        width: _map.width
-//        height:_map.height
+//2024/6/22
+    width: _map.picture.width
+    height: _map.picture.height
 
     EntityManager{
         id:_manger

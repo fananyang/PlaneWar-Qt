@@ -29,28 +29,41 @@ Item {
         }
     }
 
-    Component{
-        id:mostercreate
-        Enemy{
+//    Component{
+//        id:mostercreate
+//        Enemy{
 
-        }
-    }
+//        }
+
+//    }
     Timer{
         id:_alltime
         running: false
         onTriggered: {
-            timer.running=true
+            timer1.running=true;
+            timer2.running=true
         }
     }
 
     Timer{
-        id:timer
+        id:timer1
         interval: 2000
         repeat: true
         running: false
         onTriggered: {
 //            _manger.createEntityFromComponent(mostercreate)
             _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Entities/Enemy.qml"), {"y": parent.y+20})
+        }
+
+    }
+
+    Timer{
+        id:timer2
+        interval: 4000
+        repeat: true
+        running: false
+        onTriggered: {
+            _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Entities/Helth_props.qml"),{"y":parent.y+5})
         }
 
     }

@@ -1,76 +1,3 @@
-//import QtQuick 2.15
-//import QtQuick.Controls 2.15
-//import Felgo 4.0
-
-
-//EntityBase {
-//    id: _entity
-//    entityType: "Hero_bullet"
-
-//    Image {
-//        id: image
-//        source: "../../assets/img/blue_bullet.png"
-//        anchors.centerIn: parent
-//        width: _hero_bullet.width
-//        height: _hero_bullet.height
-//    }
-
-//    function initi_alizeBullet() {
-//        var rad = _entity.rotation / 180 * Math.PI
-
-//        var localForward = Qt.point(power * Math.cos(rad), power * Math.sin(rad))
-
-//        _hero_bullet.body.initializeBullet(localForward, _hero_bullet.body.getWorldCenter())
-//    }
-
-//    Component.onCompleted: {
-//        initi_alizeBullet();
-//    }
-
-
-
-//    property real angleDeg
-//    property int boom: 1
-//    property int power: 1000
-
-//    rotation: angleDeg
-
-//    BoxCollider {
-//        id: _hero_bullet
-
-//        width: 40
-//        height: 8
-
-//        anchors.centerIn: parent
-
-//        density: 0.003
-//        friction: 0.4
-//        restitution: 0.5
-//        body.bullet: true
-//        body.fixedRotation: true
-
-//        fixture.onBeginContact: other=>{
-//            var fixture = other;
-//            var body = other.getBody();
-//            var otherEntity = body.target
-
-//            var collidingType = otherEntity.entityType
-
-//            if(collidingType === "wall") {
-//                _entity.removeEntity()
-//                return
-//            }
-//            if(collidingType === "enemy") {
-//                entity.removeEntity()
-//                return
-//            }
-//        }
-
-//    }
-
-
-//}
-
 import QtQuick 2.0
 import QtQuick.Controls
 import Felgo 4.0
@@ -124,15 +51,13 @@ EntityBase {
                                         entity.removeEntity();
                                     }
                                     if(collidingType ==="Enemy"){
-                                        otherEntity.health++;
+                                        otherEntity.health-=8;
                                         entity.removeEntity();
                                     }
                                     if(collidingType === "Enemy_bullet"){
-                                        console.log("pb ----------------------------------------------> eb")
                                         entity.removeEntity();
                                     }
-                                    if(collidingType === "Enemy_bullet"){
-                                        console.log("pb ----------------------------------------------> eb")
+                                    if(collidingType === "Helth_props"){
                                         entity.removeEntity();
                                     }
 
