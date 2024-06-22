@@ -30,6 +30,7 @@ EntityBase {
 
         //This handler is called when 2 fixtures start to collide with each other.
         fixture.onBeginContact:other=> {
+                                   var fixture=other
                                    var collderbody = other.getBody();
                                    var collidedEntity =collderbody.target;
 
@@ -38,7 +39,6 @@ EntityBase {
                                    //The collision rules for the enemy aircraft are as follows: when the enemy aircraft is hit, it will disappear or Health reduction .
                                    if(collidedEntity.entityType ==="Wall"){
                                        _helth_props.removeEntity();
-
                                    }
                                    if(collidedEntity.entityType ==="Plane"){
                                        _helth_props.removeEntity();

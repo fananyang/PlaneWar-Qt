@@ -4,8 +4,9 @@ import QtQuick.Controls
 
 Item{
     id: _mainItem
-//    activeScene: _gameScene
-    property alias gameScene:_gameScene
+    //    activeScene: _gameScene
+    //    property alias gameScene:_gameScene
+    property alias menuScene:_menuScene
 
     MenuScene {
         id: _menuScene
@@ -13,24 +14,25 @@ Item{
         height: 1080
         column.onClicked: {
             _menuScene.visible=false;
-            _gameScene.visible=true;
-             console.log("clicked", _menuScene.visible,_gameScene.visible);
-            _gameScene.timercontrol.running=true;
+            componentLoader.source="./GameScene.qml"
+            componentLoader.active=true
+//            componentLoader.sourceComponent=gameSceneComponent
+//            console.log("clicked", _menuScene.visible,_gameScene.visible);
         }
     }
 
-    GameScene {
-        id: _gameScene
-        visible: false
+    Loader{
+        id: componentLoader
+        focus: true
     }
 
-    function gameover() {
-         console.log("game over");
-        _menuScene.visible=true;
-        _gameScene.visible=false;
-        _gameScene.timercontrol.running=false;
-         console.log("clicked", _menuScene.visible,_gameScene.visible)
+//    Component{
+//        id:gameSceneComponent
+//        GameScene{
+//            id: _gameScene
+//        }
+//    }
 
-     }
+
 
 }

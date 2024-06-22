@@ -9,7 +9,7 @@ EntityBase {
 
     property int helth:10
     //    property int defenses:800
-//    signal gameover
+//    signal gameOver
 //    signal gamewin()
 
     property alias inputActionsToKeyCode: twoAxisController.inputActionsToKeyCode
@@ -63,7 +63,7 @@ EntityBase {
 
         //    collisionTestingOnlyMode: true
 
-        density: 0.08
+        density: 0.02
         friction: 0.35
         restitution: 0.5
         body.bullet: true
@@ -124,9 +124,11 @@ EntityBase {
     onHelthChanged: {
         console.log("----------------------------------------------->",car.helth);
         if(car.helth <= 0){
-            gameover()
+            gameFail()
+//            image.visible=false
         }
     }
+
 
 
     function getRandomFloat(a, b) {

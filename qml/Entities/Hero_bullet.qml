@@ -57,6 +57,9 @@ EntityBase {
                                     if(collidingType === "Enemy_bullet"){
                                         entity.removeEntity();
                                     }
+                                    if(collidingType === "Hero_bullet"){
+                                        entity.removeEntity();
+                                    }
                                     if(collidingType === "Helth_props"){
                                         entity.removeEntity();
                                     }

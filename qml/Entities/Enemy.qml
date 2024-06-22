@@ -9,7 +9,8 @@ EntityBase {
 
 
     property int health :10
-    property int score:1
+
+    property int score : 1
     property int boom:1
 
     MultiResolutionImage {
@@ -21,7 +22,7 @@ EntityBase {
     //    y:sc.y
 
     //    y:getRandomFloat(0,200)
-    x:getRandomFloat(50,265)  //create position of x
+    x:getRandomFloat(50,600)  //create position of x
 
     BoxCollider{
         id:_enemtycollider
@@ -35,6 +36,7 @@ EntityBase {
 
         //This handler is called when 2 fixtures start to collide with each other.
         fixture.onBeginContact:other=> {
+                                   var fixture = other;
                                    var collderbody = other.getBody();
                                    var collidedEntity =collderbody.target;
 
@@ -63,6 +65,7 @@ EntityBase {
 //            _enemyimage.visible=false;
 //            _enemtycollider.visible=false;
             _enemy.removeEntity()
+
         }
     }
 

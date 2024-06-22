@@ -29,7 +29,7 @@ Scene{
         source: Qt.resolvedUrl("../../assets/img/title.png")
 //        anchors.fill: parent
         anchors.horizontalCenter: _scene.gameWindowAnchorItem.horizontalCenter
-        y:100
+        y:260
     }
 
     Column {
@@ -38,23 +38,24 @@ Scene{
         anchors.horizontalCenter: parent.horizontalCenter
 //        anchors.verticalCenter: parent.verticalCenter-parent.verticalCenter/2
         width: parent.width
-        y:parent.height/2 - parent.height/24
+        y:parent.height/2 + parent.height/12
 //                y: _title.y + _title.height + 50 // 根据标题的位置和大小调整
         spacing: 25
         MenuElement {
             id: m_start
             width: parent.width*0.7
-            label.text: "GO To War"
-//            onClicked: {
-//                gameScene.visible = true;
-//                _scene.visible = false;
-//            }
+            label.text: "Start a New Game"
+        }
+        MenuElement {
+            id: m_setting
+            width: parent.width*0.7
+            label.text: "Setting"
         }
         MenuElement {
             id: m_exit
             width: parent.width*0.7
-            height: parent.height*0.43
-            label.text: "Retreat"
+//            height: parent.height*0.43
+            label.text: "Exit"
             onClicked: {
                 Qt.quit();
             }

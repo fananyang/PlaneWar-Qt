@@ -46,7 +46,9 @@ EntityBase {
                                     }
                                     if(collidingType ==="Plane"){
                                         entity.removeEntity()
-
+                                    }
+                                    if(collidingType ==="Helth_props"){
+                                        entity.removeEntity()
                                     }
                                     if(collidingType  === "Hero_bullet"){
                                         console.log("eb ---------------------------------------------------------> pb")
