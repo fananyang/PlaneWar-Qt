@@ -4,7 +4,8 @@ import QtQuick.Controls
 import "../Entities"
 import "../Windows"
 
-Item {
+Item
+{
     property alias planer:_plane
     property alias timecontrol:_alltime
     property alias failText:_failText
@@ -38,6 +39,12 @@ Item {
 //        }
     }
 
+    Boss{
+        id:_boss
+        y:285
+        visible: false
+    }
+
     Component.onCompleted: {
         _alltime.running=true
     }
@@ -58,9 +65,12 @@ Item {
         running: _alltime.running
         onTriggered: {
             //            _manger.createEntityFromComponent(mostercreate)
-            _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Entities/Enemy.qml"), {"y": parent.y+20})
+            addmoster();
         }
 
+    }
+    function addmoster(){
+        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Entities/Enemy.qml"), {"y": parent.y+20})
     }
 
     Timer{
@@ -69,9 +79,13 @@ Item {
         repeat: true
         running: _alltime.running
         onTriggered: {
-            _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Entities/Helth_props.qml"),{"y":parent.y+5})
+            addHelthProps();
         }
 
+    }
+
+    function addHelthProps(){
+        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Entities/Helth_props.qml"),{"y":parent.y+5})
     }
 
     onScoreChanged: {

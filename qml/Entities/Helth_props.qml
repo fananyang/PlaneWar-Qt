@@ -44,6 +44,10 @@ EntityBase {
                                        _helth_props.removeEntity();
 
                                    }
+                                   if(collidedEntity.entityType ==="Helth_props"){
+                                       _helth_props.removeEntity();
+
+                                   }
                                }
     }
 

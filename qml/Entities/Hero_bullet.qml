@@ -63,6 +63,9 @@ EntityBase {
                                     if(collidingType === "Helth_props"){
                                         entity.removeEntity();
                                     }
+                                    if(collidingType === "Boss"){
+                                        entity.removeEntity();
+                                    }
 
                                     //can't hit the same wall twice, but onBeginContact called again after rotation has changed
 
@@ -86,8 +89,8 @@ EntityBase {
         id: image
         source: Qt.resolvedUrl("../../assets/img/blue_bullet.png")
         anchors.centerIn: parent
-        width:20
-        height:5
+        width:25
+        height:10
     }
 
     function applyForwardImpulse() {

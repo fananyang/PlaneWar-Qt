@@ -7,7 +7,7 @@ EntityBase {
     // the enityId should be set by the level file!
     entityType: "Plane"
 
-    property int helth:10
+    property int helth:1000
     //    property int defenses:800
 //    signal gameOver
 //    signal gamewin()
@@ -63,8 +63,8 @@ EntityBase {
 
         //    collisionTestingOnlyMode: true
 
-        density: 0.02
-        friction: 0.35
+        density: 0.05
+        friction: 0.30
         restitution: 0.5
         body.bullet: true
         body.linearDamping: 10
@@ -98,6 +98,9 @@ EntityBase {
                                     }
                                     if(collidingType ==="Helth_props"){
                                         helth+=getRandomFloat(-5,10);
+                                    }
+                                    if(collidingType ==="Boss_bullet"){
+                                        car.helth -=10;
                                     }
 
                                     //var

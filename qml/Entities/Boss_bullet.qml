@@ -54,9 +54,6 @@ EntityBase {
                                         entity.removeEntity();
 
                                     }
-                                    if(collidingType ==="Enemy_bullet"){
-                                        entity.removeEntity();
-                                    }
                                     if(collidingType ==="Boss_bullet"){
                                         entity.removeEntity();
                                     }
@@ -68,8 +65,8 @@ EntityBase {
         id: image
         source: Qt.resolvedUrl("../../assets/img/enemy_bullet.png")
         anchors.centerIn: parent
-        width: 10
-        height:12
+        width: 30
+        height:25
     }
 
     function applyForwardImpulse() {
