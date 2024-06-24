@@ -10,7 +10,7 @@ Item
     property alias timecontrol:_alltime
     property alias failText:_failText
     property alias wonText:_wonText
-    property alias gameOverTimer:_gameOverTimer
+//    property alias gameOverTimer:_gameOverTimer
     property int score : 0
     id:_level
     width: parent.width
@@ -70,6 +70,8 @@ Item
 
     }
     function addmoster(){
+
+        score++
         _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Entities/Enemy.qml"), {"y": parent.y+20})
     }
 
@@ -90,7 +92,8 @@ Item
 
     onScoreChanged: {
         if(score>=5){
-            gameWon()
+//            gameWon()
+            _bosstimer.running=true
         }
     }
 
@@ -137,9 +140,10 @@ Item
         interval: 4000
         repeat: false
         onTriggered: {
-            menuScene.column.opacity=0.8;
+            menuScene.start.opacity=0.8;
             componentLoader.active=false
             menuScene.visible=true
+            settingScene.visible=false
             _plane.image.visible=false      //can not false?
         }
     }
@@ -150,9 +154,29 @@ Item
         interval: 4000
         repeat: false
         onTriggered: {
-            menuScene.column.opacity=0.8;
+            _menuScene.start.opacity=0.8;
             componentLoader.active=false
             menuScene.visible=true
+            settingScene.visible=false
+            _boss.visible=false       //can not false?
+            _boss.bossImage.visible=false
+            _boss.removeEntity()
+        }
+    }
+
+
+
+    Timer{
+        id : _bosstimer
+        running: false
+//        interval: 1000
+        repeat: false
+        onTriggered: {
+            _boss.visible=true
+            _boss.bossFireTimer.running=true
+            _boss.bossPositionTimer.running=true
+//            console.log("------------------------------------------------------------------------------------------------------")
+//            console.log("boss.visible:",_boss.visible,"bossfire:",_boss.bossFireTimer.running,"bosspositionT:",_boss.bossPositionTimer.running)
         }
     }
 

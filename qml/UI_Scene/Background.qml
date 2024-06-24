@@ -25,10 +25,25 @@ Item {
     }
 
 
+    function bgSelect(option) {
+        switch (option) {
+        case 1:
+            bgSource = Qt.resolvedUrl("../../assets/img/img_bg_1.jpg")
+            break
+        case 2:
+            bgSource = Qt.resolvedUrl("../../assets/img/img_bg_2.jpg")
+            break
+        case 3:
+            bgSource = Qt.resolvedUrl("../../assets/img/img_bg_5.jpg")
+            break
+        }
+    }
+
+
     MultiResolutionImage {//Displays the first background imag
         id: image
         source: bgSource
-        visible: true
+        visible: false
         z:-10
         anchors.horizontalCenter: parent.horizontalCenter
 

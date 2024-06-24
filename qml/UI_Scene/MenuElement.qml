@@ -27,7 +27,7 @@ Rectangle {
         id: _tp
         onTapped: {
             clicked() // 发出 clicked 信号
-            menuElement.opacity = 0.6
+//            menuElement.opacity = 0.6
         }
         //        onPressed: {
         //            menuElement.opacity = 0.6

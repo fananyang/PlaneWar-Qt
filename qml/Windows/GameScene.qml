@@ -25,7 +25,7 @@ Scene {
         id:_map
         anchors.fill: _scene.gameWindowAnchorItem
         Component.onCompleted: {
-            //something to do
+            _map.bgSelect(settingScene.selectMap)
         }
     }
 

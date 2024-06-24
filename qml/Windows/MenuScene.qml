@@ -11,7 +11,7 @@ Scene{
 
     id: _scene
 
-    property alias column:m_start
+    property alias start:m_start
 
     width:_map.picture.width
     height: _map.picture.height
@@ -50,6 +50,9 @@ Scene{
             id: m_setting
             width: parent.width*0.7
             label.text: "Setting"
+            onClicked: {
+                settingScene.visible=true
+            }
         }
         MenuElement {
             id: m_exit
