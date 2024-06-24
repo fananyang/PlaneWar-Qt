@@ -6,6 +6,10 @@ EntityBase {
     id: entity
     entityType: "Enemy_bullet"
 
+    property alias image:_image
+    property alias collider:boxCollider
+
+
     Component.onCompleted: {
         console.debug("Rocket.onCompleted, width:", width);
         applyForwardImpulse();
@@ -22,11 +26,13 @@ EntityBase {
         width: 50
         height: 20
 
+//        collisionTestingOnlyMode: true
+
         anchors.centerIn: parent
 
         density: 0.003
         friction: 0.4
-        restitution: 0.5
+//        restitution: 0.5
         body.bullet: true
         // we prevent the physics engine from applying rotation to the rocket, because we will do it ourselves
         body.fixedRotation: true
@@ -42,30 +48,37 @@ EntityBase {
                                     var collidingType = otherEntity.entityType
 
                                     if(collidingType === "Wall") {
-                                        entity.removeEntity()
+                                        _image.visible=false;
+                                        entity.removeEntity();
                                     }
                                     if(collidingType ==="Plane"){
-                                        entity.removeEntity()
+                                        _image.visible=false;
+                                        entity.removeEntity();
                                     }
                                     if(collidingType ==="Helth_props"){
-                                        entity.removeEntity()
+                                        _image.visible=false;
+                                        entity.removeEntity();
                                     }
                                     if(collidingType  === "Hero_bullet"){
+                                        _image.visible=false;
                                         entity.removeEntity();
 
                                     }
                                     if(collidingType ==="Enemy_bullet"){
+                                        _image.visible=false;
                                         entity.removeEntity();
                                     }
                                     if(collidingType ==="Boss_bullet"){
+                                        _image.visible=false;
                                         entity.removeEntity();
                                     }
+
 
                                 }
     }
 
     Image {
-        id: image
+        id: _image
         source: Qt.resolvedUrl("../../assets/img/enemy_bullet.png")
         anchors.centerIn: parent
         width: 10
@@ -74,7 +87,7 @@ EntityBase {
 
     function applyForwardImpulse() {
         var power = 1000    //bullet speed
-        var rad = entity.rotation / 180 * Math.PI
+        var rad = entity.rotation / 180 * Math.PI   //The angle of rotation of the bullet
 
         //can't use body.toWorldVector() because the rotation is not instantly
         var localForward = Qt.point(power * Math.cos(rad), power * Math.sin(rad))

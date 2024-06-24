@@ -6,9 +6,11 @@ import QtQuick.Controls 2.15
 EntityBase {
     id: _enemy
     entityType: "Enemy"
-    property alias image: _enemyimage
 
-    property int health :10
+    property alias image:_enemyimage
+
+
+    property int health :15
 
     property int score : 1
     property int boom:1
@@ -51,19 +53,24 @@ EntityBase {
 
                                    if(collidedEntity.entityType ==="Wall"){
                                        _enemy.removeEntity();
-//                                       _enemy.visible=false;
+                                       //                                       _enemy.visible=false;
 
                                    }
                                    if(collidedEntity.entityType === "Hero_bullet"){
-                                       _enemy.health-=10;
+                                       _enemy.health-=5;
+
                                    }
                                }
     }
 
     onHealthChanged: {
+
+        if(health <=5){
+            _boomexp.visible=true;
+            t1.start();
+            //            _boomexp.visible=false;
+        }
         if(health <= 0){
-//            _enemyimage.visible=false;
-//            _enemtycollider.visible=false;
             _enemy.removeEntity()
 
         }
@@ -105,34 +112,62 @@ EntityBase {
     }
 
 
-//    function enemyfire(){
-//        var imagePointInWorldCoordinates = mapToItem(level,_enemyimage.x, _enemyimage.y);
-
-//        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("Enemy_bullet.qml"), {"x": imagePointInWorldCoordinates.x+20, "y": imagePointInWorldCoordinates.y+40, "rotation": _enemy.rotation+90});
-
-//    }
-    function enemyfire() {
-        var imagePointInWorldCoordinates = mapToItem(level, _enemyimage.x, _enemyimage.y);
-        var bulletCount = 10;
-        var angleStep = 360 / bulletCount;
-
-
-        for (var i = 0; i < bulletCount; i++) {
-            var currentAngle = _enemy.rotation - angleStep * i;
-            var radians = currentAngle * Math.PI / 180;
-            var bulletX = imagePointInWorldCoordinates.x +  + Math.cos(radians) * 80;
-            var bulletY = imagePointInWorldCoordinates.y +  + Math.sin(radians) * 80;
-
-            var bullet = _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("Boss_bullet.qml"), {
-                "x": bulletX,
-                "y": bulletY,
-                "rotation": currentAngle
-            });
-
-
-
+    Timer {
+        id: t1
+        interval: 800 // a new target(=monster) is spawned every second
+        running: false
+        onTriggered: {
+            console.log("<<<----------------_boomexp--------------------------------->")
+            _boomexp.visible=false;
         }
     }
 
+    function enemyfire(){
+        var imagePointInWorldCoordinates = mapToItem(level,_enemyimage.x, _enemyimage.y);
+
+        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("Enemy_bullet.qml"), {"x": imagePointInWorldCoordinates.x+20, "y": imagePointInWorldCoordinates.y+40, "rotation": _enemy.rotation+90});
+
+    }
     Component.onCompleted:t.start();
+
+    SpriteSequence {
+        id: _boomexp
+        width: 90
+        height: 90
+        anchors.centerIn: _enemyimage
+        //        anchors.fill: _enemyimage
+        visible: false
+
+        Sprite {
+            name: "bomb1"
+            source: "../../assets/img/boom1.png"
+            to: { "bomb2": 1 }
+            frameDuration: 100
+        }
+        Sprite {
+            name: "bomb2"
+            source: "../../assets/img/boom2.png"
+            to: { "bomb3": 1 }
+            frameDuration: 150
+        }
+        Sprite {
+            name: "bomb3"
+            source: "../../assets/img/boom3.png"
+            to: { "bomb4": 1 }
+            frameDuration: 200
+        }
+        Sprite {
+            name: "bomb4"
+            source: "../../assets/img/boom4.png"
+            to: { "bomb5": 1 }
+            frameDuration: 150
+        }
+        Sprite {
+            name: "bomb5"
+            source: "../../assets/img/bomm0.png"
+            to: { "bomb1": 1 }
+            frameDuration: 100
+        }
+
+    }
 }

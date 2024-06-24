@@ -26,7 +26,7 @@ EntityBase {
 
         density: 0.003
         friction: 0.4
-        restitution: 0.5
+    //    restitution: 0.5  rebound
         body.bullet: true
         // we prevent the physics engine from applying rotation to the rocket, because we will do it ourselves
         body.fixedRotation: true

@@ -48,22 +48,28 @@ EntityBase {
                                     //      }
 
                                     if(collidingType === "Wall") {
+                                        image.visible=false;
                                         entity.removeEntity();
                                     }
                                     if(collidingType ==="Enemy"){
-                                        otherEntity.health-=8;
+                                        image.visible=false;
+//                                        otherEntity.health-=8;
                                         entity.removeEntity();
                                     }
                                     if(collidingType === "Enemy_bullet"){
+                                        image.visible=false;
                                         entity.removeEntity();
                                     }
                                     if(collidingType === "Hero_bullet"){
+                                        image.visible=false;
                                         entity.removeEntity();
                                     }
                                     if(collidingType === "Helth_props"){
+                                        image.visible=false;
                                         entity.removeEntity();
                                     }
                                     if(collidingType === "Boss"){
+                                        image.visible=false;
                                         entity.removeEntity();
                                     }
 
@@ -94,7 +100,7 @@ EntityBase {
     }
 
     function applyForwardImpulse() {
-        var power = 1500             //bullet speed
+        var power = 1850            //bullet speed
         var rad = entity.rotation / 180 * Math.PI
 
         //can't use body.toWorldVector() because the rotation is not instantly
