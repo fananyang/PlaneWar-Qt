@@ -6,7 +6,7 @@ import QtQuick.Controls 2.15
 EntityBase {
     id: _enemy
     entityType: "Enemy"
-
+    property alias image: _enemyimage
 
     property int health :10
 
@@ -105,11 +105,34 @@ EntityBase {
     }
 
 
-    function enemyfire(){
-        var imagePointInWorldCoordinates = mapToItem(level,_enemyimage.x, _enemyimage.y);
+//    function enemyfire(){
+//        var imagePointInWorldCoordinates = mapToItem(level,_enemyimage.x, _enemyimage.y);
 
-        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("Enemy_bullet.qml"), {"x": imagePointInWorldCoordinates.x+20, "y": imagePointInWorldCoordinates.y+40, "rotation": _enemy.rotation+90});
+//        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("Enemy_bullet.qml"), {"x": imagePointInWorldCoordinates.x+20, "y": imagePointInWorldCoordinates.y+40, "rotation": _enemy.rotation+90});
 
+//    }
+    function enemyfire() {
+        var imagePointInWorldCoordinates = mapToItem(level, _enemyimage.x, _enemyimage.y);
+        var bulletCount = 10;
+        var angleStep = 360 / bulletCount;
+
+
+        for (var i = 0; i < bulletCount; i++) {
+            var currentAngle = _enemy.rotation - angleStep * i;
+            var radians = currentAngle * Math.PI / 180;
+            var bulletX = imagePointInWorldCoordinates.x +  + Math.cos(radians) * 80;
+            var bulletY = imagePointInWorldCoordinates.y +  + Math.sin(radians) * 80;
+
+            var bullet = _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("Boss_bullet.qml"), {
+                "x": bulletX,
+                "y": bulletY,
+                "rotation": currentAngle
+            });
+
+
+
+        }
     }
+
     Component.onCompleted:t.start();
 }

@@ -19,13 +19,6 @@ EntityBase {
         height: 200
         source: Qt.resolvedUrl("../../assets/img/small_enemy.png")
     }
-
-    //    x:sc.x
-    //    y:sc.y
-
-    //    y:getRandomFloat(0,200)
-    //  x:getRandomFloat(50,600)  //create position of x
-
     BoxCollider{
         id:_bosscollider
         anchors.fill: _bossimage    // make the collider as big as the image
@@ -87,14 +80,6 @@ EntityBase {
         running: true
         loops: 1000
         easing.type: Easing.InOutQuad
-
-        // 当动画结束时，重新设置目标位置
-        //            onFinished: {
-        //                console.log(startX,"------------------------------------------------->",endX);
-        //                startX =_boss.endX
-        //                endX=getRandomFloat(50,600);
-        //                console.log(startX,"------------------------------------------------->>>",endX);
-        //            }
     }
 
 
@@ -123,18 +108,34 @@ EntityBase {
         }
     }
 
+    function enemyfire() {
+        var imagePointInWorldCoordinates = mapToItem(level, _enemyimage.x, _enemyimage.y);
+        var bulletCount = 10;
+        var angleStep = 360 / bulletCount;
 
-    function enemyfire(){
-        var imagePointInWorldCoordinates = mapToItem(level,_bossimage.x, _bossimage.y);
 
-        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("Boss_bullet.qml"), {"x": imagePointInWorldCoordinates.x+80, "y": imagePointInWorldCoordinates.y+160, "rotation": _boss.rotation+95});
+        for (var i = 0; i < bulletCount; i++) {
+            var currentAngle = _enemy.rotation - angleStep * i;
+            var radians = currentAngle * Math.PI / 180;
+            var bulletX = imagePointInWorldCoordinates.x +  + Math.cos(radians) * 80;
+            var bulletY = imagePointInWorldCoordinates.y +  + Math.sin(radians) * 80;
 
+            var bullet = _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("Boss_bullet.qml"), {
+                "x": bulletX,
+                "y": bulletY,
+                "rotation": currentAngle
+            });
+
+
+
+        }
     }
+
+
     Component.onCompleted:{
         if(_boss.visible){
             _bossposition.start();
             t.start();
         }
     }
-
 }
