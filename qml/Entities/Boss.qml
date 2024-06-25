@@ -20,7 +20,7 @@ EntityBase {
         id: _bossimage
         width: 200
         height: 200
-        source: Qt.resolvedUrl("../../assets/img/small_enemy.png")
+        source: Qt.resolvedUrl("../../assets/img/boss_0.png")
     }
 
     //    x:sc.x
@@ -78,6 +78,8 @@ EntityBase {
 
     onHealthChanged: {
         if(health<=10){
+            background_music.play();
+            _m1.running=true
             t.running=false
             _bossimage.visible=false
             _boomexp.visible=true
@@ -238,4 +240,22 @@ EntityBase {
         }
 
     }
+    BackgroundMusic {
+        id:background_music
+//        loop:Infinite
+        source: Qt.resolvedUrl("../../assets/wav/exploBig.wav")
+    }
+
+//     Component.onCompleted:{
+//         background_music.play();
+//     }
+    Timer {
+        id: _m1
+        interval: 1000 // a new target(=monster) is spawned every second
+        running: false
+        onTriggered: {
+            background_music.stop();
+        }
+    }
+
 }

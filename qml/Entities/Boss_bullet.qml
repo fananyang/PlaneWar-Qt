@@ -75,7 +75,7 @@ EntityBase {
 
     Image {
         id: image
-        source: Qt.resolvedUrl("../../assets/img/enemy_bullet.png")
+        source: Qt.resolvedUrl("../../assets/img/boss_bullet_triangle .png")
         anchors.centerIn: parent
         width: 30
         height:25

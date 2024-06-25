@@ -30,7 +30,7 @@ Item{
         visible: false
     }
 
-    GameSoundEffect {
+    BackgroundMusic {
         id:background_music
 //        loop:Infinite
         source: Qt.resolvedUrl("../../assets/wav/music_game.wav")

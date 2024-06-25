@@ -106,14 +106,14 @@ EntityBase {
                                         if(defenses >0){
                                             defenses-=4;
                                         }else{
-                                        car.helth -=2;
+                                            car.helth -=2;
                                         }
                                     }
                                     if(collidingType === "Enemy"){
                                         if(defenses >0){
                                             defenses-=10;
                                         }else{
-                                        car.helth -=5;
+                                            car.helth -=5;
                                         }
                                     }
                                     if(collidingType ==="Helth_props"){
@@ -126,7 +126,7 @@ EntityBase {
                                         if(defenses >0){
                                             defenses-=15;
                                         }else{
-                                        car.helth -=10;
+                                            car.helth -=10;
                                         }
                                     }
                                     if(collidingType ==="Rocket_props"){
@@ -135,7 +135,7 @@ EntityBase {
                                             flag=1;
                                         }
                                         if( num<3 ){
-                                        rc=Qt.resolvedUrl("Rocket.qml")
+                                            rc=Qt.resolvedUrl("Rocket.qml")
                                             num++
                                         }
                                     }
@@ -145,16 +145,16 @@ EntityBase {
                                             flag=0;
                                         }
                                         if( num<3 ){
-                                        rc=Qt.resolvedUrl("Hero_bullet.qml")
+                                            rc=Qt.resolvedUrl("Hero_bullet.qml")
                                             num++
                                         }
                                     }
 
                                     //var
-//                                    console.debug("car contact with: ", other, body, component)
-//                                    console.debug("car collided entity type:", collidingType)
+                                    //                                    console.debug("car contact with: ", other, body, component)
+                                    //                                    console.debug("car collided entity type:", collidingType)
 
-//                                    console.debug("car contactNormal:", contactNormal, "x:", contactNormal.x, "y:", contactNormal.y)
+                                    //                                    console.debug("car contactNormal:", contactNormal, "x:", contactNormal.x, "y:", contactNormal.y)
 
                                 }
     }
@@ -162,6 +162,8 @@ EntityBase {
 
     function handleInputAction(action) {
         if( action === "fire" && image.visible ) {
+            background_music.play()
+            _m1.running=true
             // create the rocket at the specified position with the rotation of the car that fires it
 
             //            _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("Hero_bullet.qml"), {"x": imagePointInWorldCoordinates.x-70, "y": imagePointInWorldCoordinates.y-50, "rotation": car.rotation+270})
@@ -221,6 +223,24 @@ EntityBase {
         }
 
         return Math.random() * (b - a) + a;
+    }
+
+    BackgroundMusic {
+        id:background_music
+        //        loop:Infinite
+        source: Qt.resolvedUrl("../../assets/wav/boom.wav")
+    }
+
+    //     Component.onCompleted:{
+    //         background_music.play();
+    //     }
+    Timer {
+        id: _m1
+        interval: 295// a new target(=monster) is spawned every second
+        running: false
+        onTriggered: {
+            background_music.stop();
+        }
     }
 
 }

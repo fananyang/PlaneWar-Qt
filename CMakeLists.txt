@@ -12,7 +12,6 @@ set(PRODUCT_IDENTIFIER "com.yourcompany.wizardEVAP.Planewar")
 set(PRODUCT_VERSION_NAME "1.0.0")
 set(PRODUCT_VERSION_CODE 1)
 
-
 # Set either "test" or "publish" stage:
 set(PRODUCT_STAGE "test")
 
