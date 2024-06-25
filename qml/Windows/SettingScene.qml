@@ -34,19 +34,18 @@ Scene {
         MultiResolutionImage {
             id: image
             anchors.fill: parent
-            source: Qt.resolvedUrl("../../assets/img/img_bg_1.jpg")
+            source: Qt.resolvedUrl("../../assets/img/img_bg_2.jpg")
         }
-//        MouseArea {
-//            anchors.fill: parent
-//            hoverEnabled: true
-//            onEntered: { stage1.opacity = 0.7 }
-//            onExited: { stage1.opacity = 1 }
-//            onClicked: { selectStage1.visible = true; selectStage2.visible = false; selectStage3.visible = false; selectMap = 1 }
-//        }
         TapHandler{
             onTapped: {
                 selectStage1.visible = true; selectStage2.visible = false; selectStage3.visible = false; selectMap = 1
             }
+        }
+        opacity: mouse1.hovered? 0.6: 0.8
+        HoverHandler{
+            id:mouse1
+            acceptedDevices: PointerDevice.Mouse
+            cursorShape: Qt.PointingHandCursor
         }
     }
     MultiResolutionImage {
@@ -76,19 +75,18 @@ Scene {
         y: 250+50+50
         MultiResolutionImage {
             anchors.fill: parent
-            source: Qt.resolvedUrl("../../assets/img/img_bg_2.jpg")
+            source: Qt.resolvedUrl("../../assets/img/img_bg_1.jpg")
         }
-//        MouseArea {
-//            anchors.fill: parent
-//            hoverEnabled: true
-//            onEntered: { stage2.opacity = 0.7 }
-//            onExited: { stage2.opacity = 1 }
-//            onClicked: { selectStage1.visible = false; selectStage2.visible = true; selectStage3.visible = false; selectMap = 2 }
-//        }
         TapHandler{
             onTapped: {
                 selectStage1.visible = false; selectStage2.visible = true; selectStage3.visible = false; selectMap = 2
             }
+        }
+        opacity: mouse2.hovered? 0.6: 0.8
+        HoverHandler{
+            id:mouse2
+            acceptedDevices: PointerDevice.Mouse
+            cursorShape: Qt.PointingHandCursor
         }
     }
     MultiResolutionImage {
@@ -121,17 +119,16 @@ Scene {
             anchors.fill: parent
             source:Qt.resolvedUrl("../../assets/img/img_bg_5.jpg")
         }
-//        MouseArea {
-//            anchors.fill: parent
-//            hoverEnabled: true
-//            onEntered: { stage3.opacity = 0.7 }
-//            onExited: { stage3.opacity = 1 }
-//            onClicked: { selectStage1.visible = false; selectStage2.visible = false; selectStage3.visible = true; selectMap = 3 }
-//        }
         TapHandler{
             onTapped: {
                 selectStage1.visible = false; selectStage2.visible = false; selectStage3.visible = true; selectMap = 3
             }
+        }
+        opacity: mouse3.hovered? 0.6: 0.8
+        HoverHandler{
+            id:mouse3
+            acceptedDevices: PointerDevice.Mouse
+            cursorShape: Qt.PointingHandCursor
         }
     }
     MultiResolutionImage {
@@ -145,9 +142,7 @@ Scene {
     }
 
 
-    /*
-     *
-     *back*/
+    /*back*/
     MultiResolutionImage {
         id: m_backImage
         source: Qt.resolvedUrl("../../assets/img/title.png")
@@ -155,23 +150,18 @@ Scene {
         y: parent.height - 220
 
         property alias mouseArea: m_handler
-//        MouseArea {
-//            id: m_Area
-//            anchors.fill: parent
-//            hoverEnabled: true
-//            onEntered: { m_backImage.opacity = 0.7 }
-//            onExited: { m_backImage.opacity = 1 }
-//            onClicked: {
-//                scene.visible=false
-//                menuScene.visible=true
-//            }
-//        }
         TapHandler{
             id:m_handler
             onTapped: {
                 settingScene.visible=false
                 menuScene.visible= true
             }
+        }
+        opacity: mouse.hovered? 0.6: 0.8
+        HoverHandler{
+            id:mouse
+            acceptedDevices: PointerDevice.Mouse
+            cursorShape: Qt.PointingHandCursor
         }
     }
 

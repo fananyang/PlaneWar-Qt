@@ -53,6 +53,7 @@ Item
         id:_alltime
         running: false
         onTriggered: {
+            enemytimer2.running=true
             timer1.running=true;
             timer2.running=true;
             timer3.running=true;
@@ -101,7 +102,7 @@ Item
     }
     Timer{
         id:timer4
-        interval: 7000
+        interval: 10000
         repeat: true
         running: _alltime.running
         onTriggered: {
@@ -118,6 +119,23 @@ Item
             addHero_bulletProps();
         }
 
+    }
+
+    Timer{
+        id:enemytimer2
+        interval: 5000
+        repeat: true
+        running: _alltime.running
+        onTriggered: {
+            //            _manger.createEntityFromComponent(mostercreate)
+            addmoster2();
+        }
+
+    }
+    function addmoster2(){
+
+        score++
+        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Entities/Enemy01.qml"), {"y": parent.y+20})
     }
 
 
@@ -172,7 +190,7 @@ Item
     function gameFail() {
         console.log("game over");
         _failText.visible=true
-        gameOverTimer.running=true
+        _gameOverTimer.running=true
     }
 
     function gameWon() {
@@ -224,6 +242,110 @@ Item
             _boss.bossPositionTimer.running=true
 //            console.log("------------------------------------------------------------------------------------------------------")
 //            console.log("boss.visible:",_boss.visible,"bossfire:",_boss.bossFireTimer.running,"bosspositionT:",_boss.bossPositionTimer.running)
+        }
+    }
+
+    Rectangle {
+        id: bossHealthSplide
+        visible: _boss.visible
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        anchors.topMargin: 25
+        height: 20
+        width: 650
+        opacity: 0.6
+        radius: 200
+        Rectangle{
+            id: bossHealth
+            color: "red"
+            height: 18
+            radius: 200
+            anchors.verticalCenter: parent.verticalCenter
+            width: _boss.health/1000 * 650
+            SequentialAnimation on width {
+                running: _boss.visible
+                PropertyAnimation {
+                    from:0
+                    to: 650
+                    duration: 1000 // 1 second for fade in
+                }
+            }
+        }
+    }
+
+    Rectangle {
+        id: planeHealthSplide
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 5
+        height: 30
+        width: 350
+        radius: 100
+        opacity: 0.8
+        Rectangle{
+            id: planeHealth
+            color: "green"
+            height:30
+            opacity: 0.4
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            width:  _plane.helth/100 * 350
+            SequentialAnimation on width {
+                running: _plane.visible
+                PropertyAnimation {
+                    from:0
+                    to: 350
+                    duration: 2000 // 1 second for fade in
+                }
+            }
+            onWidthChanged: {
+                if(width<=280){
+                    color="yellow"
+                }else {
+                    color="green"
+                }
+                if(width<=105){
+                    color="red"
+                }
+            }
+        }
+    }
+
+    Rectangle {
+        id: planeDefenseSplide
+        anchors.left: parent.left
+        anchors.bottom: parent.bottom
+        anchors.bottomMargin: 5
+        height: 30
+        width: 350
+        radius: 100
+        opacity: 0.8
+        Rectangle{
+            id: planeDefense
+            color: "green"
+            height:30
+            opacity: 0.4
+            anchors.left: parent.left
+            anchors.bottom: parent.bottom
+            width:  _plane.defenses/100 * 350
+//            SequentialAnimation on width {
+////                running: _plane.visible
+//                PropertyAnimation {
+//                    from:0
+//                    to: 350
+//                    duration: 2000 // 1 second for fade in
+//                }
+//            }
+            onWidthChanged: {
+                if(width<=280){
+                    color="yellow"
+                }else {
+                    color="green"
+                }
+                if(width<=105){
+                    color="red"
+                }
+            }
         }
     }
 

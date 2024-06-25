@@ -190,6 +190,10 @@ EntityBase {
 
     onHelthChanged: {
         console.log("----------------------------------------------->",car.helth);
+        if(car.helth>100){
+            car.helth=100
+        }
+
         if(car.helth <= 0){
             gameFail()
             //            image.visible=false

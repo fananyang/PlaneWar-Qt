@@ -57,6 +57,10 @@ EntityBase {
                                        if(_boss.visible)
                                        _boss.health-=10;
                                    }
+                                   if( collidedEntity.entityType ==="Rocket" ){
+                                       if(_boss.visible)
+                                       _boss.health=health-30;
+                                   }
                                }
     }
 
@@ -188,7 +192,7 @@ EntityBase {
         running: false
         onTriggered: {
             console.log("<<<----------------_boomexp--------------------------------->");
-            health-=10;
+            health-=20;
             _boomexp.visible=false;
         }
     }

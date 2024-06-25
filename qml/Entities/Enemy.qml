@@ -57,8 +57,13 @@ EntityBase {
 
                                    }
                                    if(collidedEntity.entityType === "Hero_bullet"){
-                                       _enemy.health-=5;
+                                       if(_enemy.visible){
+                                       _enemy.health-=5;}
 
+                                   }
+                                   if( collidedEntity.entityType ==="Rocket" ){
+                                       if(_enemy.visible)
+                                       _enemy.health=health-5;
                                    }
                                }
     }

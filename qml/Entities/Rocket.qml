@@ -104,8 +104,8 @@ EntityBase {
         id: image
         source: Qt.resolvedUrl("../../assets/img/rocket.png")
         anchors.centerIn: parent
-        width:25
-        height:10
+        width:50
+        height:20
     }
 
     function applyForwardImpulse() {
