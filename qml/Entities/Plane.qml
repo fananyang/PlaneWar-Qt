@@ -7,10 +7,10 @@ EntityBase {
     // the enityId should be set by the level file!
     entityType: "Plane"
 
-    property int helth:1000
-    //    property int defenses:800
-//    signal gameOver
-//    signal gamewin()
+    property int helth:100
+    property int defenses:0
+    //    signal gameOver
+    //    signal gamewin()
 
     property alias inputActionsToKeyCode: twoAxisController.inputActionsToKeyCode
     property alias image: image
@@ -19,6 +19,9 @@ EntityBase {
     property alias controller: twoAxisController
 
     readonly property real forwardForce: 8000 * world.pixelsPerMeter
+    property int num: 1  //num of Hero_bullet or rocket
+    property int flag: 0 //0->hero_bullet,1->rocket
+    property url rc:Qt.resolvedUrl("Hero_bullet.qml")
 
     Component.onCompleted: {
         console.debug("car.onCompleted()")
@@ -42,6 +45,15 @@ EntityBase {
             Item {x: image.width/2+30}
         ]
 
+    }
+
+    Image {
+        id: _fs
+        source:Qt.resolvedUrl("../../assets/img/defense_props.png")
+        anchors.centerIn: image
+        width: image.width+15
+        height: image.height+10
+        visible: false
     }
 
     // this is used as input for the BoxCollider force & torque properties
@@ -91,36 +103,88 @@ EntityBase {
 
 
                                     if(collidingType ==="Enemy_bullet"){
-                                        car.helth --;
+                                        if(defenses >0){
+                                            defenses-=4;
+                                        }else{
+                                        car.helth -=2;
+                                        }
                                     }
                                     if(collidingType === "Enemy"){
-                                        car.helth-=component.boom
+                                        if(defenses >0){
+                                            defenses-=10;
+                                        }else{
+                                        car.helth -=5;
+                                        }
                                     }
                                     if(collidingType ==="Helth_props"){
                                         helth+=getRandomFloat(-5,10);
                                     }
+                                    if(collidingType ==="Defense_props"){
+                                        defenses+=getRandomFloat(2,20);
+                                    }
                                     if(collidingType ==="Boss_bullet"){
+                                        if(defenses >0){
+                                            defenses-=15;
+                                        }else{
                                         car.helth -=10;
+                                        }
+                                    }
+                                    if(collidingType ==="Rocket_props"){
+                                        if(flag !== 1){
+                                            num=0;
+                                            flag=1;
+                                        }
+                                        if( num<3 ){
+                                        rc=Qt.resolvedUrl("Rocket.qml")
+                                            num++
+                                        }
+                                    }
+                                    if(collidingType ==="Hero_bullet_props"){
+                                        if(flag !== 0){
+                                            num=0;
+                                            flag=0;
+                                        }
+                                        if( num<3 ){
+                                        rc=Qt.resolvedUrl("Hero_bullet.qml")
+                                            num++
+                                        }
                                     }
 
                                     //var
-                                    console.debug("car contact with: ", other, body, component)
-                                    console.debug("car collided entity type:", collidingType)
+//                                    console.debug("car contact with: ", other, body, component)
+//                                    console.debug("car collided entity type:", collidingType)
 
-                                    console.debug("car contactNormal:", contactNormal, "x:", contactNormal.x, "y:", contactNormal.y)
+//                                    console.debug("car contactNormal:", contactNormal, "x:", contactNormal.x, "y:", contactNormal.y)
 
                                 }
     }
 
+
     function handleInputAction(action) {
-        if( action === "fire") {
-            var imagePointInWorldCoordinates = mapToItem(level,image.imagePoints[0].x, image.imagePoints[0].y)
-            console.debug("imagePointInWorldCoordinates x", imagePointInWorldCoordinates.x, " y:", imagePointInWorldCoordinates.y)
-
+        if( action === "fire" && image.visible ) {
             // create the rocket at the specified position with the rotation of the car that fires it
-            _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("Hero_bullet.qml"), {"x": imagePointInWorldCoordinates.x-70, "y": imagePointInWorldCoordinates.y-50, "rotation": car.rotation+270})
-            _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("Hero_bullet.qml"), {"x": imagePointInWorldCoordinates.x-40, "y": imagePointInWorldCoordinates.y-50, "rotation": car.rotation+270})
 
+            //            _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("Hero_bullet.qml"), {"x": imagePointInWorldCoordinates.x-70, "y": imagePointInWorldCoordinates.y-50, "rotation": car.rotation+270})
+            //            _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("Hero_bullet.qml"), {"x": imagePointInWorldCoordinates.x-40, "y": imagePointInWorldCoordinates.y-50, "rotation": car.rotation+270})
+            planefire(num,rc);
+        }
+    }
+
+    function planefire(nums,rcs){
+        var imagePointInWorldCoordinates = mapToItem(level,image.imagePoints[0].x, image.imagePoints[0].y)
+        console.debug("imagePointInWorldCoordinates x", imagePointInWorldCoordinates.x, " y:", imagePointInWorldCoordinates.y)
+
+        if(nums === 1){
+            _manger.createEntityFromUrlWithProperties(rcs, {"x": imagePointInWorldCoordinates.x-65, "y": imagePointInWorldCoordinates.y-50, "rotation": car.rotation+270})
+        }
+        if(nums ===2){
+            _manger.createEntityFromUrlWithProperties(rcs, {"x": imagePointInWorldCoordinates.x-70, "y": imagePointInWorldCoordinates.y-50, "rotation": car.rotation+270})
+            _manger.createEntityFromUrlWithProperties(rcs, {"x": imagePointInWorldCoordinates.x-40, "y": imagePointInWorldCoordinates.y-50, "rotation": car.rotation+270})
+        }
+        if(nums ===3){
+            _manger.createEntityFromUrlWithProperties(rcs, {"x": imagePointInWorldCoordinates.x-90, "y": imagePointInWorldCoordinates.y-50, "rotation": car.rotation+270})
+            _manger.createEntityFromUrlWithProperties(rcs, {"x": imagePointInWorldCoordinates.x-65, "y": imagePointInWorldCoordinates.y-50, "rotation": car.rotation+270})
+            _manger.createEntityFromUrlWithProperties(rcs, {"x": imagePointInWorldCoordinates.x-40, "y": imagePointInWorldCoordinates.y-50, "rotation": car.rotation+270})
         }
     }
 
@@ -128,7 +192,17 @@ EntityBase {
         console.log("----------------------------------------------->",car.helth);
         if(car.helth <= 0){
             gameFail()
-//            image.visible=false
+            //            image.visible=false
+        }
+    }
+
+    onDefensesChanged: {
+        _fs.visible=true;
+        if(defenses <=0){
+            _fs.visible=false;
+        }
+        if(defenses<0) {
+            defenses=0
         }
     }
 

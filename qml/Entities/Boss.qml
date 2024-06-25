@@ -11,7 +11,7 @@ EntityBase {
     entityId: "Boss"
     entityType: "Boss"
 
-    property int health :50
+    property int health :1000
 
     property int score : 100
     property int boom:100
@@ -60,11 +60,38 @@ EntityBase {
                                }
     }
 
+    //    onHealthChanged: {
+    //        if(health <=10){
+    //            _boomexp.visible=true;
+    //            _bossimage.visible=false;
+    //            t1.start();
+    //            //            _boomexp.visible=false;
+    //        }
+    //        if(health <= 0){
+    //            gameWon()
+    //        }
+    //    }
+
     onHealthChanged: {
+        if(health<=10){
+            t.running=false
+            _bossimage.visible=false
+            _boomexp.visible=true
+            _bossposition.running=false
+            startX=endX
+            console.log("-----------------------------------------------------------------------")
+            t1.running;
+        }
         if(health <= 0){
             gameWon()
+            _bossimage.visible=false
+            _bosscollider.visible=false
+            t.running=false
+            _bossposition.running=false
         }
+
     }
+
 
     function getRandomFloat(a, b) {
         // make sure a <= b
@@ -90,20 +117,11 @@ EntityBase {
         running: true
         loops: 1000
         easing.type: Easing.InOutQuad
-
-        // 当动画结束时，重新设置目标位置
-        //            onFinished: {
-        //                console.log(startX,"------------------------------------------------->",endX);
-        //                startX =_boss.endX
-        //                endX=getRandomFloat(50,600);
-        //                console.log(startX,"------------------------------------------------->>>",endX);
-        //            }
     }
-
 
     Timer {
         id: _bossposition
-        interval: 1800 // a new target(=monster) is spawned every second
+        interval: 1800 // update boss position per 1.8s
         repeat: true
         running: false
         onTriggered: {
@@ -127,12 +145,36 @@ EntityBase {
     }
 
 
-    function enemyfire(){
-        var imagePointInWorldCoordinates = mapToItem(level,_bossimage.x, _bossimage.y);
+//    function enemyfire(){
+//        var imagePointInWorldCoordinates = mapToItem(level,_bossimage.x, _bossimage.y);
 
-        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("Boss_bullet.qml"), {"x": imagePointInWorldCoordinates.x+80, "y": imagePointInWorldCoordinates.y+160, "rotation": _boss.rotation+95});
+//        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("Boss_bullet.qml"), {"x": imagePointInWorldCoordinates.x+80, "y": imagePointInWorldCoordinates.y+160, "rotation": _boss.rotation+95});
 
-    }
+//    }
+
+    function enemyfire() {
+            var imagePointInWorldCoordinates = mapToItem(level, _bossimage.x, _bossimage.y);
+            var bulletCount = 10;
+            var angleStep = 360 / bulletCount;
+
+
+            for (var i = 0; i < bulletCount; i++) {
+                var currentAngle = _boss.rotation - angleStep * i;
+                var radians = currentAngle * Math.PI / 180;
+                var bulletX = imagePointInWorldCoordinates.x +  + Math.cos(radians) * 80;
+                var bulletY = imagePointInWorldCoordinates.y +  + Math.sin(radians) * 80;
+
+                var bullet = _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("Boss_bullet.qml"), {
+                    "x": bulletX+50+45,
+                    "y": bulletY+50+25,
+                    "rotation": currentAngle
+                });
+
+
+
+            }
+        }
+
     Component.onCompleted:{
         if(_boss.visible){
             _bossposition.start();
@@ -140,4 +182,56 @@ EntityBase {
         }
     }
 
+    Timer {
+        id: t1
+        interval: 800 // a new target(=monster) is spawned every second
+        running: false
+        onTriggered: {
+            console.log("<<<----------------_boomexp--------------------------------->");
+            health-=10;
+            _boomexp.visible=false;
+        }
+    }
+
+
+    SpriteSequence {
+        id: _boomexp
+        width: 90
+        height: 90
+        anchors.centerIn: _bossimage
+        //        anchors.fill: _enemyimage
+        visible: false
+
+        Sprite {
+            name: "bomb1"
+            source: "../../assets/img/boom1.png"
+            to: { "bomb2": 1 }
+            frameDuration: 100
+        }
+        Sprite {
+            name: "bomb2"
+            source: "../../assets/img/boom2.png"
+            to: { "bomb3": 1 }
+            frameDuration: 150
+        }
+        Sprite {
+            name: "bomb3"
+            source: "../../assets/img/boom3.png"
+            to: { "bomb4": 1 }
+            frameDuration: 200
+        }
+        Sprite {
+            name: "bomb4"
+            source: "../../assets/img/boom4.png"
+            to: { "bomb5": 1 }
+            frameDuration: 150
+        }
+        Sprite {
+            name: "bomb5"
+            source: "../../assets/img/bomm0.png"
+            to: { "bomb1": 1 }
+            frameDuration: 100
+        }
+
+    }
 }

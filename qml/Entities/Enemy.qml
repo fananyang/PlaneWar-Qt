@@ -119,6 +119,7 @@ EntityBase {
         onTriggered: {
             console.log("<<<----------------_boomexp--------------------------------->")
             _boomexp.visible=false;
+            health-=5;
         }
     }
 

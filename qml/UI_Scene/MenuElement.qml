@@ -13,7 +13,8 @@ Rectangle {
 
     width: parent.width * 0.7; height: 60
     color: "lightgreen"
-    opacity: 0.8
+    opacity: mouse.hovered? 0.6: 0.8
+//    opacity: 0.8
     radius: 12
 
     Label {
@@ -37,4 +38,10 @@ Rectangle {
         //            clicked() // 发出 clicked 信号
         //        }
     }
+
+   HoverHandler{
+       id:mouse
+       acceptedDevices: PointerDevice.Mouse
+       cursorShape: Qt.PointingHandCursor
+   }
 }

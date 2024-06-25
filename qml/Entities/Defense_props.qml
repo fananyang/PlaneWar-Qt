@@ -4,17 +4,18 @@ import Felgo
 import "../Entities"
 import "../../assets/img"
 
-EntityBase {
-    id:_helth_props
+EntityBase{
 
-    entityId: "Props0"
-    entityType: "Helth_props"
+    id:_defense_props
+
+    entityId: "Props1"
+    entityType: "Defense_props"
 
     Image {
         id: _propsimage
         width: 50
         height: 45
-        source: Qt.resolvedUrl("../../assets/img/blood.png")
+        source: Qt.resolvedUrl("../../assets/img/defense.png")
     }
 
     x:getRandomFloat(50,500)
@@ -45,22 +46,17 @@ EntityBase {
 
                                    //The collision rules for the enemy aircraft are as follows: when the enemy aircraft is hit, it will disappear or Health reduction .
                                    if(collidedEntity.entityType ==="Wall"){
-//                                       _propsimage.visible=false;
-                                       _helth_props.removeEntity();
+                                       //                                       _propsimage.visible=false;
+                                       _defense_props.removeEntity();
                                    }
                                    if(collidedEntity.entityType ==="Plane"){
                                        _propsimage.visible=false;
-                                       _helth_props.removeEntity();
+                                       _defense_props.removeEntity();
 
                                    }
-                                   if(collidedEntity.entityType ==="Helth_props"){
-//                                       _propsimage.visible=false;
-                                       _helth_props.removeEntity();
-
-                                   }
-                                   if(collidedEntity.entityType ==="Defense_props"){
-//                                       _propsimage.visible=false;
-                                       _helth_props.removeEntity();
+                                   if(collidedEntity.entityType ==="Denfense_props"){
+                                       //                                       _propsimage.visible=false;
+                                       _defense_props.removeEntity();
 
                                    }
                                }
@@ -88,11 +84,8 @@ EntityBase {
         duration: 30000
         //duration:getRandomFloat(4000, 10000) // vary animation duration between 2-4 seconds for the 480 px scene width
         onStopped: {
-            console.debug("helth_props reached base")
+            console.debug("defense_props reached base")
             // changeToGameOverScene(false)
         }
     }
-
-
-
 }

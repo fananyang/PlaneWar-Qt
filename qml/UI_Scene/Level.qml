@@ -54,7 +54,10 @@ Item
         running: false
         onTriggered: {
             timer1.running=true;
-            timer2.running=true
+            timer2.running=true;
+            timer3.running=true;
+            timer4.running=true;
+            timer5.running=true;
         }
     }
 
@@ -77,7 +80,7 @@ Item
 
     Timer{
         id:timer2
-        interval: 4000
+        interval: 6000
         repeat: true
         running: _alltime.running
         onTriggered: {
@@ -86,9 +89,53 @@ Item
 
     }
 
+    Timer{
+        id:timer3
+        interval: 8000
+        repeat: true
+        running: _alltime.running
+        onTriggered: {
+            addDefenseProps();
+        }
+
+    }
+    Timer{
+        id:timer4
+        interval: 7000
+        repeat: true
+        running: _alltime.running
+        onTriggered: {
+            addRocketProps();
+        }
+
+    }
+    Timer{
+        id:timer5
+        interval: 7000
+        repeat: true
+        running: _alltime.running
+        onTriggered: {
+            addHero_bulletProps();
+        }
+
+    }
+
+
+    function addHero_bulletProps(){
+        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Entities/Hero_bullet_props.qml"),{"y":parent.y+2})
+    }
+
     function addHelthProps(){
         _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Entities/Helth_props.qml"),{"y":parent.y+5})
     }
+
+    function addDefenseProps(){
+        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Entities/Defense_props.qml"),{"y":parent.y+20})
+    }
+    function addRocketProps(){
+        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Entities/Rocket_props.qml"),{"y":parent.y+15})
+    }
+
 
     onScoreChanged: {
         if(score>=5){

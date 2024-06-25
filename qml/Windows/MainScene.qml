@@ -5,8 +5,6 @@ import "../Entities"
 
 Item{
     id: _mainItem
-    //    activeScene: _gameScene
-//        property alias gameScene:_gameScene
     property alias menuScene:_menuScene
     property alias settingScene:_settingScene
 
@@ -16,11 +14,8 @@ Item{
         height: 1080
         start.onClicked: {
             _menuScene.visible=false
-//            _settingScene.visible=false
             componentLoader.source="./GameScene.qml"
             componentLoader.active=true
-//            componentLoader.sourceComponent=gameSceneComponent
-//            console.log("clicked", _menuScene.visible,_gameScene.visible);
         }
     }
 
@@ -35,14 +30,14 @@ Item{
         visible: false
     }
 
+    GameSoundEffect {
+        id:background_music
+//        loop:Infinite
+        source: Qt.resolvedUrl("../../assets/wav/music_game.wav")
+    }
 
-//    Component{
-//        id:gameSceneComponent
-//        GameScene{
-//            id: _gameScene
-//        }
-//    }
-
-
+     Component.onCompleted:{
+         background_music.play();
+     }
 
 }

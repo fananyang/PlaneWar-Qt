@@ -72,6 +72,15 @@ EntityBase {
                                         image.visible=false;
                                         entity.removeEntity();
                                     }
+                                    if(collidingType ==="Rocket"){
+                                        entity.removeEntity();
+                                    }
+                                    if(collidingType ==="Hero_bullet_props"){
+                                        entity.removeEntity()
+                                    }
+                                    if(collidingType ==="Rocket_props"){
+                                        entity.removeEntity()
+                                    }
 
                                     //can't hit the same wall twice, but onBeginContact called again after rotation has changed
 

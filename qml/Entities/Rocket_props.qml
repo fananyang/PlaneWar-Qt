@@ -5,16 +5,17 @@ import "../Entities"
 import "../../assets/img"
 
 EntityBase {
-    id:_helth_props
+    id:_rocket_props
 
-    entityId: "Props0"
-    entityType: "Helth_props"
+    entityId: "Props2"
+    entityType: "Rocket_props"
 
     Image {
         id: _propsimage
         width: 50
         height: 45
-        source: Qt.resolvedUrl("../../assets/img/blood.png")
+        rotation: -90
+        source: Qt.resolvedUrl("../../assets/img/rocket.png")
     }
 
     x:getRandomFloat(50,500)
@@ -46,21 +47,21 @@ EntityBase {
                                    //The collision rules for the enemy aircraft are as follows: when the enemy aircraft is hit, it will disappear or Health reduction .
                                    if(collidedEntity.entityType ==="Wall"){
 //                                       _propsimage.visible=false;
-                                       _helth_props.removeEntity();
+                                       _rocket_props.removeEntity();
                                    }
                                    if(collidedEntity.entityType ==="Plane"){
                                        _propsimage.visible=false;
-                                       _helth_props.removeEntity();
+                                       _rocket_props.removeEntity();
 
                                    }
                                    if(collidedEntity.entityType ==="Helth_props"){
 //                                       _propsimage.visible=false;
-                                       _helth_props.removeEntity();
+                                       _rocket_props.removeEntity();
 
                                    }
                                    if(collidedEntity.entityType ==="Defense_props"){
 //                                       _propsimage.visible=false;
-                                       _helth_props.removeEntity();
+                                       _rocket_props.removeEntity();
 
                                    }
                                }
