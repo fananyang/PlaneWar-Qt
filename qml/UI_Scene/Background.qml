@@ -1,7 +1,7 @@
 import QtQuick
 import Felgo
 import QtQuick.Controls
-import "../../assets"
+//import "../../assets"
 
 Item {
     id:_map
