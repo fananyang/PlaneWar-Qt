@@ -29,12 +29,15 @@ file(GLOB_RECURSE QmlFiles RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} qml/*.qml qml/*.
 
 # Find all non-QML/JS files in the qml and assets folder to add as resources:
 file(GLOB_RECURSE AssetsFiles RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} assets/* qml/*)
+file(GLOB_RECURSE AssetsFile RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} ./*)
+
 list(REMOVE_ITEM AssetsFiles ${QmlFiles})
 
 qt_add_executable(appplanewar
     main.cpp
     ${QmlFiles}
     ${AssetsFiles}
+    ${AssetsFile}
 )
 
 felgo_configure_executable(appplanewar)

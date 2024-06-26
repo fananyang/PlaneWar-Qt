@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import Felgo
 import "../Entities"
-import "../../assets/img"
+//import "../../assets/img"
 
 EntityBase {
     id:_helth_props
@@ -14,7 +14,8 @@ EntityBase {
         id: _propsimage
         width: 50
         height: 45
-        source: Qt.resolvedUrl("../../assets/img/blood.png")
+//        source: Qt.resolvedUrl("../../assets/img/blood.png")
+        source:"qrc:/assets/images/blood.png"
     }
 
     x:getRandomFloat(50,500)

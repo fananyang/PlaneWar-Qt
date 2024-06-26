@@ -26,7 +26,8 @@ Scene{
         //        source: "../assets/img/title.png"
 //        width: parent.width/2+parent.width/6
 //        height: parent.height/4
-        source: Qt.resolvedUrl("../../assets/img/title.png")
+//        source: Qt.resolvedUrl("../../assets/img/title.png")
+        source:"qrc:/assets/images/title.png"
 //        anchors.fill: parent
         anchors.horizontalCenter: _scene.gameWindowAnchorItem.horizontalCenter
         y:260

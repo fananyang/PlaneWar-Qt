@@ -32,7 +32,8 @@ EntityBase {
 
     Image {
         id: image
-        source: Qt.resolvedUrl("../../assets/img/blue_plane.png")
+//        source: Qt.resolvedUrl("../../assets/img/blue_plane.png")
+        source:"qrc:/assets/images/blue_plane.png"
 
         anchors.centerIn: parent
         width: boxCollider.width
@@ -228,7 +229,8 @@ EntityBase {
     BackgroundMusic {
         id:background_music
         //        loop:Infinite
-        source: Qt.resolvedUrl("../../assets/wav/boom.wav")
+//        source: Qt.resolvedUrl("../../assets/wav/boom.wav")
+        source: "qrc:/assets/wav/boom.wav"
     }
 
     //     Component.onCompleted:{

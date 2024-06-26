@@ -14,8 +14,8 @@ Enemy{
     property int boom:5
 
 
-    image.source: Qt.resolvedUrl("../../assets/img/small_enemy.png")
-
+    //    image.source: Qt.resolvedUrl("../../assets/img/small_enemy.png")
+    image.source:"qrc:/assets/images/small_enemy.png"
 
     function enemyfire(){
         var imagePointInWorldCoordinates = mapToItem(level,image.x, image.y);

@@ -13,7 +13,8 @@ Scene {
     MultiResolutionImage {
         id: bg;
         anchors.fill: parent;
-        source: Qt.resolvedUrl("../../assets/img/setting.jpg")
+//        source: Qt.resolvedUrl("../../assets/img/setting.jpg")
+        source:"qrc:/assets/images/setting.jpg"
     }
 
 //level 1
@@ -34,7 +35,8 @@ Scene {
         MultiResolutionImage {
             id: image
             anchors.fill: parent
-            source: Qt.resolvedUrl("../../assets/img/img_bg_2.jpg")
+//            source: Qt.resolvedUrl("../../assets/img/img_bg_2.jpg")
+            source:"qrc:/assets/images/img_bg_2.jpg"
         }
         TapHandler{
             onTapped: {
@@ -52,7 +54,9 @@ Scene {
         id: selectStage1
         height: 60
         width: 60
-        source: Qt.resolvedUrl("../../assets/img/setting.jpg")
+//        source: Qt.resolvedUrl("../../assets/img/setting.jpg")
+        source:"qrc:/assets/images/setting.jpg"
+
         x: 700
         y: 120+50+50
         visible: true
@@ -75,7 +79,8 @@ Scene {
         y: 250+50+50
         MultiResolutionImage {
             anchors.fill: parent
-            source: Qt.resolvedUrl("../../assets/img/img_bg_1.jpg")
+             source:"qrc:/assets/images/img_bg_1.jpg"
+//            source: Qt.resolvedUrl("../../assets/img/img_bg_1.jpg")
         }
         TapHandler{
             onTapped: {
@@ -93,7 +98,8 @@ Scene {
         id: selectStage2
         height: 60
         width: 60
-        source: Qt.resolvedUrl("../../assets/img/setting.jpg")
+        source:"qrc:/assets/images/setting.jpg"
+//        source: Qt.resolvedUrl("../../assets/img/setting.jpg")
         x: 700
         y: 270+50+50
         visible: false
@@ -117,7 +123,8 @@ Scene {
         y: 400+50+50
         MultiResolutionImage {
             anchors.fill: parent
-            source:Qt.resolvedUrl("../../assets/img/img_bg_5.jpg")
+            source:"qrc:/assets/images/img_bg_5.jpg"
+//            source:Qt.resolvedUrl("../../assets/img/img_bg_5.jpg")
         }
         TapHandler{
             onTapped: {
@@ -135,7 +142,8 @@ Scene {
         id: selectStage3
         height: 60
         width: 60
-        source: Qt.resolvedUrl("../../assets/img/setting.jpg")
+        source:"qrc:/assets/images/setting.jpg"
+//        source: Qt.resolvedUrl("../../assets/img/setting.jpg")
         x: 700
         y: 420+50+50
         visible: false
@@ -145,7 +153,8 @@ Scene {
     /*back*/
     MultiResolutionImage {
         id: m_backImage
-        source: Qt.resolvedUrl("../../assets/img/title.png")
+        source:"qrc:/assets/images/title.png"
+//        source: Qt.resolvedUrl("../../assets/img/title.png")
         anchors.horizontalCenter: parent.horizontalCenter
         y: parent.height - 220
 

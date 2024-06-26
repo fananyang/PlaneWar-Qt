@@ -146,31 +146,36 @@ EntityBase {
 
         Sprite {
             name: "bomb1"
-            source: "../../assets/img/boom1.png"
+//            source: "../../assets/img/boom1.png"
+            source: "qrc:/assets/images/boom1.png"
             to: { "bomb2": 1 }
             frameDuration: 100
         }
         Sprite {
             name: "bomb2"
-            source: "../../assets/img/boom2.png"
+//            source: "../../assets/img/boom2.png"
+            source: "qrc:/assets/images/boom2.png"
             to: { "bomb3": 1 }
             frameDuration: 150
         }
         Sprite {
             name: "bomb3"
-            source: "../../assets/img/boom3.png"
+//            source: "../../assets/img/boom3.png"
+            source: "qrc:/assets/images/boom3.png"
             to: { "bomb4": 1 }
             frameDuration: 200
         }
         Sprite {
             name: "bomb4"
-            source: "../../assets/img/boom4.png"
+//            source: "../../assets/img/boom4.png"
+            source: "qrc:/assets/images/boom4.png"
             to: { "bomb5": 1 }
             frameDuration: 150
         }
         Sprite {
             name: "bomb5"
-            source: "../../assets/img/bomm0.png"
+//            source: "../../assets/img/bomm0.png"
+            source: "qrc:/assets/images/bomm0.png"
             to: { "bomb1": 1 }
             frameDuration: 100
         }

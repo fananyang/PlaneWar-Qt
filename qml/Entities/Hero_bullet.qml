@@ -81,6 +81,9 @@ EntityBase {
                                     if(collidingType ==="Rocket_props"){
                                         entity.removeEntity()
                                     }
+                                    if(collidingType ==="Defense_props"){
+                                        entity.removeEntity()
+                                    }
 
                                     //can't hit the same wall twice, but onBeginContact called again after rotation has changed
 
@@ -103,7 +106,8 @@ EntityBase {
     Image {
         id: image
 //        source: Qt.resolvedUrl("../../assets/img/blue_bullet.png")
-        source: Qt.resolvedUrl("../../assets/img/rocket2.png")
+//        source: Qt.resolvedUrl("../../assets/img/rocket2.png")
+        source:"qrc:/assets/images/rocket2.png"
         anchors.centerIn: parent
         width:45
         height:15

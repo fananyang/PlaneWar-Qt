@@ -12,7 +12,8 @@ Enemy{
     score : 1
     boom:15
 
-    image.source:Qt.resolvedUrl("../../assets/img/small_enemy.png")
+  //  image.source:Qt.resolvedUrl("../../assets/img/small_enemy.png")
+    image.source: "qrc:/assets/images/small_enemy.png"
 
     function enemyfire() {
 

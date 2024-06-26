@@ -33,7 +33,8 @@ Item{
     BackgroundMusic {
         id:background_music
 //        loop:Infinite
-        source: Qt.resolvedUrl("../../assets/wav/music_game.wav")
+//        source: Qt.resolvedUrl("../../assets/wav/music_game.wav")
+        source: "qrc:/assets/wav/music_game.wav"
     }
 
      Component.onCompleted:{

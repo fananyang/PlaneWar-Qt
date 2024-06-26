@@ -28,13 +28,16 @@ Item {
     function bgSelect(option) {
         switch (option) {
         case 1:
-            bgSource = Qt.resolvedUrl("../../assets/img/img_bg_2.jpg")
+//            bgSource = Qt.resolvedUrl("../../assets/img/img_bg_2.jpg")
+            bgSource ="qrc:/assets/images/img_bg_2.jpg"
             break
         case 2:
-            bgSource = Qt.resolvedUrl("../../assets/img/img_bg_1.jpg")
+//            bgSource = Qt.resolvedUrl("../../assets/img/img_bg_1.jpg")
+            bgSource ="qrc:/assets/images/img_bg_1.jpg"
             break
         case 3:
-            bgSource = Qt.resolvedUrl("../../assets/img/img_bg_5.jpg")
+//            bgSource = Qt.resolvedUrl("../../assets/img/img_bg_5.jpg")
+            bgSource ="qrc:/assets/images/img_bg_5.jpg"
             break
         }
     }

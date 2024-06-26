@@ -2,7 +2,7 @@ import QtQuick
 import QtQuick.Controls
 import Felgo
 import "../Entities"
-import "../../assets/img"
+//import "../../assets/img"
 
 EntityBase {
     id:_Hero_bullet_props
@@ -14,7 +14,8 @@ EntityBase {
         id: _propsimage
         width: 50
         height: 45
-        source: Qt.resolvedUrl("../../assets/img/prop_1.png")
+//        source: Qt.resolvedUrl("../../assets/img/prop_1.png")
+        source:"qrc:/assets/images/prop_1.png"
     }
 
     x:getRandomFloat(50,500)

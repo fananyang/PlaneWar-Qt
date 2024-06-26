@@ -5,7 +5,8 @@ Enemy{
     id: _enemy03
     entityType: "Enemy_03"
 //    image.source: Qt.resolvedUrl("../../assets/img/small_enemy.png")
-    image.source:  Qt.resolvedUrl("../../assets/img/small_enemy.png")
+//    image.source:  Qt.resolvedUrl("../../assets/img/small_enemy.png")
+    image.source: "qrc:/assets/images/small_enemy.png"
     property int health :10
 
     property int score : 1

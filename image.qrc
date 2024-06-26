@@ -1,0 +1,38 @@
+<RCC>
+    <qresource prefix="/">
+        <file>assets/img/boss_0.png</file>
+        <file>assets/images/blood.png</file>
+        <file>assets/images/blue_bullet.png</file>
+        <file>assets/images/blue_plane.png</file>
+        <file>assets/images/bomm0.png</file>
+        <file>assets/images/boom1.png</file>
+        <file>assets/images/boom2.png</file>
+        <file>assets/images/boom3.png</file>
+        <file>assets/images/boom4.png</file>
+        <file>assets/images/boss_bullet_triangle.png</file>
+        <file>assets/images/defense_props.png</file>
+        <file>assets/images/defense.png</file>
+        <file>assets/images/enemy_bullet.png</file>
+        <file>assets/images/felgo-logo.png</file>
+        <file>assets/images/img_bg_1.jpg</file>
+        <file>assets/images/img_bg_2.jpg</file>
+        <file>assets/images/img_bg_4.jpg</file>
+        <file>assets/images/img_bg_5.jpg</file>
+        <file>assets/images/prop_1.png</file>
+        <file>assets/images/red_bullet.png</file>
+        <file>assets/images/rocket.png</file>
+        <file>assets/images/rocket2.png</file>
+        <file>assets/images/setting.jpg</file>
+        <file>assets/images/small_enemy.png</file>
+        <file>assets/images/title.png</file>
+        <file>assets/wav/boom.wav</file>
+        <file>assets/wav/exploBig.wav</file>
+        <file>assets/wav/exploPop.wav</file>
+        <file>assets/wav/exploStd.wav</file>
+        <file>assets/wav/life_add.wav</file>
+        <file>assets/wav/life_lose.wav</file>
+        <file>assets/wav/music_game.wav</file>
+        <file>assets/wav/music_menu.wav</file>
+        <file>assets/wav/power.wav</file>
+    </qresource>
+</RCC>

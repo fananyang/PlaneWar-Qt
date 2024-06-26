@@ -3,6 +3,7 @@ import Felgo
 import QtQuick.Controls
 import "../Entities"
 import "../Windows"
+import "../planewar.js" as Controllor
 
 Item
 {
@@ -69,15 +70,15 @@ Item
         running: _alltime.running
         onTriggered: {
             //            _manger.createEntityFromComponent(mostercreate)
-            addmoster();
+            Controllor.addmoster();
         }
 
     }
-    function addmoster(){
+//    function addmoster(){
 
-        score++
-        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Entities/Enemy.qml"), {"y": parent.y+20})
-    }
+//        score++
+//        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Entities/Enemy.qml"), {"y": parent.y+20})
+//    }
 
     Timer{
         id:timer2
@@ -85,7 +86,7 @@ Item
         repeat: true
         running: _alltime.running
         onTriggered: {
-            addHelthProps();
+            Controllor.addHelthProps();
         }
 
     }
@@ -96,7 +97,7 @@ Item
         repeat: true
         running: _alltime.running
         onTriggered: {
-            addDefenseProps();
+            Controllor.addDefenseProps();
         }
 
     }
@@ -106,7 +107,7 @@ Item
         repeat: true
         running: _alltime.running
         onTriggered: {
-            addRocketProps();
+            Controllor.addRocketProps();
         }
 
     }
@@ -116,7 +117,7 @@ Item
         repeat: true
         running: _alltime.running
         onTriggered: {
-            addHero_bulletProps();
+            Controllor.addHero_bulletProps();
         }
 
     }
@@ -128,31 +129,31 @@ Item
         running: _alltime.running
         onTriggered: {
             //            _manger.createEntityFromComponent(mostercreate)
-            addmoster2();
+            Controllor.addmoster2();
         }
 
     }
-    function addmoster2(){
+//    function addmoster2(){
 
-        score++
-        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Entities/Enemy01.qml"), {"y": parent.y+20})
-    }
+//        score++
+//        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Entities/Enemy01.qml"), {"y": parent.y+20})
+//    }
 
 
-    function addHero_bulletProps(){
-        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Entities/Hero_bullet_props.qml"),{"y":parent.y+2})
-    }
+//    function addHero_bulletProps(){
+//        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Entities/Hero_bullet_props.qml"),{"y":parent.y+2})
+//    }
 
-    function addHelthProps(){
-        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Entities/Helth_props.qml"),{"y":parent.y+5})
-    }
+//    function addHelthProps(){
+//        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Entities/Helth_props.qml"),{"y":parent.y+5})
+//    }
 
-    function addDefenseProps(){
-        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Entities/Defense_props.qml"),{"y":parent.y+20})
-    }
-    function addRocketProps(){
-        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Entities/Rocket_props.qml"),{"y":parent.y+15})
-    }
+//    function addDefenseProps(){
+//        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Entities/Defense_props.qml"),{"y":parent.y+20})
+//    }
+//    function addRocketProps(){
+//        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("../Entities/Rocket_props.qml"),{"y":parent.y+15})
+//    }
 
 
     onScoreChanged: {
