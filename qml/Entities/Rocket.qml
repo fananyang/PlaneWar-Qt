@@ -7,7 +7,7 @@ EntityBase {
     entityType: "Rocket"
 
     Component.onCompleted: {
-        console.debug("Rocket.onCompleted, width:", width);
+//        console.debug("Rocket.onCompleted, width:", width);
         applyForwardImpulse();
     }
 

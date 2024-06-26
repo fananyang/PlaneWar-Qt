@@ -1,6 +1,7 @@
 import QtQuick
 import Felgo
 import QtQuick.Controls
+import QtQml.Models
 import "../Entities"
 import "../UI_Scene"
 

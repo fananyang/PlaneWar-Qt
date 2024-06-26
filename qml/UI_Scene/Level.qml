@@ -60,6 +60,7 @@ Item
             timer3.running=true;
             timer4.running=true;
             timer5.running=true;
+            timer6.running=true;
         }
     }
 
@@ -82,7 +83,7 @@ Item
 
     Timer{
         id:timer2
-        interval: 6000
+        interval: 10000
         repeat: true
         running: _alltime.running
         onTriggered: {
@@ -103,7 +104,7 @@ Item
     }
     Timer{
         id:timer4
-        interval: 10000
+        interval: 12000
         repeat: true
         running: _alltime.running
         onTriggered: {
@@ -113,7 +114,7 @@ Item
     }
     Timer{
         id:timer5
-        interval: 7000
+        interval: 11000
         repeat: true
         running: _alltime.running
         onTriggered: {
@@ -121,10 +122,20 @@ Item
         }
 
     }
+    Timer{
+        id:timer6
+        interval: 6500
+        repeat: true
+        running: _alltime.running
+        onTriggered: {
+            Controllor.addmoster3()
+        }
+
+    }
 
     Timer{
         id:enemytimer2
-        interval: 5000
+        interval: 9000
         repeat: true
         running: _alltime.running
         onTriggered: {
@@ -157,10 +168,11 @@ Item
 
 
     onScoreChanged: {
-        if(score>=5){
+        if(score>=100){
 //            gameWon()
             _bosstimer.running=true
         }
+
     }
 
     Text {
@@ -189,13 +201,13 @@ Item
 
 
     function gameFail() {
-        console.log("game over");
+//        console.log("game over");
         _failText.visible=true
         _gameOverTimer.running=true
     }
 
     function gameWon() {
-        console.log("game won");
+//        console.log("game won");
         _wonText.visible=true
         _gameWonTimer.running=true
     }
@@ -245,6 +257,7 @@ Item
 //            console.log("boss.visible:",_boss.visible,"bossfire:",_boss.bossFireTimer.running,"bosspositionT:",_boss.bossPositionTimer.running)
         }
     }
+
 
     Rectangle {
         id: bossHealthSplide

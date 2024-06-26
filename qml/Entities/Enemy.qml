@@ -17,7 +17,9 @@ EntityBase {
 
     MultiResolutionImage {
         id: _enemyimage
-        source: Qt.resolvedUrl("../../assets/img/small_enemy.png")
+//        source: Qt.resolvedUrl("../../assets/img/small_enemy.png")
+//         source: "qrc:/assets/images/small_enemy.png"
+        source:"qrc:/assets/images/enemy00.png"
     }
 
     //    x:sc.x
@@ -42,7 +44,7 @@ EntityBase {
                                    var collderbody = other.getBody();
                                    var collidedEntity =collderbody.target;
 
-                                   console.log("collided with entity:",collidedEntity.entityType);
+//                                   console.log("collided with entity:",collidedEntity.entityType);
 
                                    //The collision rules for the enemy aircraft are as follows: when the enemy aircraft is hit, it will disappear or Health reduction .
 
@@ -63,7 +65,7 @@ EntityBase {
                                    }
                                    if( collidedEntity.entityType ==="Rocket" ){
                                        if(_enemy.visible)
-                                       _enemy.health=health-5;
+                                       _enemy.health=health-10;
                                    }
                                }
     }
@@ -77,7 +79,7 @@ EntityBase {
         }
         if(health <= 0){
             _enemy.removeEntity()
-
+            _enemy.visible=false
         }
     }
 
@@ -100,7 +102,6 @@ EntityBase {
         duration: 22000
         //duration:getRandomFloat(4000, 10000) // vary animation duration between 2-4 seconds for the 480 px scene width
         onStopped: {
-            console.debug("ennmy reached base")
             // changeToGameOverScene(false)
         }
     }
@@ -111,7 +112,7 @@ EntityBase {
         repeat: true
         running: false
         onTriggered: {
-            console.log("enemy fire")
+//            console.log("enemy fire")
             enemyfire();
         }
     }
@@ -122,7 +123,6 @@ EntityBase {
         interval: 800 // a new target(=monster) is spawned every second
         running: false
         onTriggered: {
-            console.log("<<<----------------_boomexp--------------------------------->")
             _boomexp.visible=false;
             health-=5;
         }
@@ -131,7 +131,7 @@ EntityBase {
     function enemyfire(){
         var imagePointInWorldCoordinates = mapToItem(level,_enemyimage.x, _enemyimage.y);
 
-        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("Enemy_bullet.qml"), {"x": imagePointInWorldCoordinates.x+20, "y": imagePointInWorldCoordinates.y+40, "rotation": _enemy.rotation+90});
+        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("Enemy_bullet.qml"), {"x": imagePointInWorldCoordinates.x+31, "y": imagePointInWorldCoordinates.y+60, "rotation": _enemy.rotation+90,"entityId":getRandomFloat(10,700)});
 
     }
     Component.onCompleted:t.start();

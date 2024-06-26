@@ -46,7 +46,7 @@ EntityBase {
                                    var collderbody = other.getBody();
                                    var collidedEntity =collderbody.target;
 
-                                   console.log("collided with entity:",collidedEntity.entityType);
+//                                   console.log("collided with entity:",collidedEntity.entityType);
 
                                    //The collision rules for the enemy aircraft are as follows: when the enemy aircraft is hit, it will disappear or Health reduction .
 
@@ -86,7 +86,6 @@ EntityBase {
             _boomexp.visible=true
             _bossposition.running=false
             startX=endX
-            console.log("-----------------------------------------------------------------------")
             t1.running;
         }
         if(health <= 0){
@@ -98,6 +97,8 @@ EntityBase {
         }
 
     }
+
+
 
 
     function getRandomFloat(a, b) {
@@ -128,14 +129,14 @@ EntityBase {
 
     Timer {
         id: _bossposition
-        interval: 1800 // update boss position per 1.8s
+        interval: 1750 // update boss position per 1.8s
         repeat: true
         running: false
         onTriggered: {
-            console.log(startX,"------------------------------------------------->",endX);
+//            console.log(startX,"------------------------------------------------->",endX);
             startX =_boss.endX
             endX=getRandomFloat(50,550);
-            console.log(startX,"------------------------------------------------->>>",endX);
+//            console.log(startX,"------------------------------------------------->>>",endX);
 
         }
     }
@@ -146,7 +147,7 @@ EntityBase {
         repeat: true
         running: false
         onTriggered: {
-            console.log("boss fire")
+//            console.log("boss fire")
             enemyfire();
         }
     }
@@ -175,6 +176,7 @@ EntityBase {
                     "x": bulletX+50+45,
                     "y": bulletY+50+25,
                     "rotation": currentAngle
+                    ,"entityId":getRandomFloat(4,500)
                 });
 
 
@@ -194,7 +196,6 @@ EntityBase {
         interval: 800 // a new target(=monster) is spawned every second
         running: false
         onTriggered: {
-            console.log("<<<----------------_boomexp--------------------------------->");
             health-=20;
             _boomexp.visible=false;
         }

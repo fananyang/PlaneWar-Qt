@@ -11,7 +11,7 @@ EntityBase {
 
 
     Component.onCompleted: {
-        console.debug("Rocket.onCompleted, width:", width);
+//        console.debug("Rocket.onCompleted, width:", width);
         applyForwardImpulse();
     }
 
@@ -95,8 +95,8 @@ EntityBase {
 //        source: Qt.resolvedUrl("../../assets/img/enemy_bullet.png")
         source:"qrc:/assets/images/enemy_bullet.png"
         anchors.centerIn: parent
-        width: 10
-        height:12
+        width: 13
+        height:13
     }
 
     function applyForwardImpulse() {

@@ -42,7 +42,7 @@ EntityBase {
                                    var collderbody = other.getBody();
                                    var collidedEntity =collderbody.target;
 
-                                   console.log("collided with entity:",collidedEntity.entityType);
+//                                   console.log("collided with entity:",collidedEntity.entityType);
 
                                    //The collision rules for the enemy aircraft are as follows: when the enemy aircraft is hit, it will disappear or Health reduction .
                                    if(collidedEntity.entityType ==="Wall"){
@@ -89,7 +89,7 @@ EntityBase {
         duration: 30000
         //duration:getRandomFloat(4000, 10000) // vary animation duration between 2-4 seconds for the 480 px scene width
         onStopped: {
-            console.debug("helth_props reached base")
+//            console.debug("helth_props reached base")
             // changeToGameOverScene(false)
         }
     }

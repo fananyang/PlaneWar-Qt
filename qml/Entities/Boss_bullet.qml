@@ -7,7 +7,7 @@ EntityBase {
     entityType: "Enemy_bullet"
 
     Component.onCompleted: {
-        console.debug("Rocket.onCompleted, width:", width);
+//        console.debug("Rocket.onCompleted, width:", width);
         applyForwardImpulse();
     }
 

@@ -24,10 +24,10 @@ EntityBase {
     property url rc:Qt.resolvedUrl("Hero_bullet.qml")
 
     Component.onCompleted: {
-        console.debug("car.onCompleted()")
-        console.debug("car.x:", x)
+//        console.debug("car.onCompleted()")
+//        console.debug("car.x:", x)
         var mapped = mapToItem(world.debugDraw, x, y)
-        console.debug("car.x world:", mapped.x)
+//        console.debug("car.x world:", mapped.x)
     }
 
     Image {
@@ -50,7 +50,8 @@ EntityBase {
 
     Image {
         id: _fs
-        source:Qt.resolvedUrl("../../assets/img/defense_props.png")
+//        source:Qt.resolvedUrl("../../assets/img/defense_props.png")
+        source: "qrc:/assets/images/defense_props.png"
         anchors.centerIn: image
         width: image.width+15
         height: image.height+10
@@ -91,9 +92,9 @@ EntityBase {
         torque: twoAxisController.xAxis*2000 * world.pixelsPerMeter * world.pixelsPerMeter
 
         Component.onCompleted: {
-            console.debug("car.physics.x:", x)
+//            console.debug("car.physics.x:", x)
             var mapped = mapToItem(world.debugDraw, x, y)
-            console.debug("car.physics.x world:", mapped.x)
+//            console.debug("car.physics.x world:", mapped.x)
         }
 
         fixture.onBeginContact: (other, contactNormal) => {
@@ -175,31 +176,31 @@ EntityBase {
 
     function planefire(nums,rcs){
         var imagePointInWorldCoordinates = mapToItem(level,image.imagePoints[0].x, image.imagePoints[0].y)
-        console.debug("imagePointInWorldCoordinates x", imagePointInWorldCoordinates.x, " y:", imagePointInWorldCoordinates.y)
+//        console.debug("imagePointInWorldCoordinates x", imagePointInWorldCoordinates.x, " y:", imagePointInWorldCoordinates.y)
 
         if(nums === 1){
-            _manger.createEntityFromUrlWithProperties(rcs, {"x": imagePointInWorldCoordinates.x-65, "y": imagePointInWorldCoordinates.y-50, "rotation": car.rotation+270})
+            _manger.createEntityFromUrlWithProperties(rcs, {"x": imagePointInWorldCoordinates.x-65, "y": imagePointInWorldCoordinates.y-50, "rotation": car.rotation+270,"entityId":getRandomFloat(4,500)})
         }
         if(nums ===2){
-            _manger.createEntityFromUrlWithProperties(rcs, {"x": imagePointInWorldCoordinates.x-70, "y": imagePointInWorldCoordinates.y-50, "rotation": car.rotation+270})
-            _manger.createEntityFromUrlWithProperties(rcs, {"x": imagePointInWorldCoordinates.x-40, "y": imagePointInWorldCoordinates.y-50, "rotation": car.rotation+270})
+            _manger.createEntityFromUrlWithProperties(rcs, {"x": imagePointInWorldCoordinates.x-70, "y": imagePointInWorldCoordinates.y-50, "rotation": car.rotation+270,"entityId":getRandomFloat(500,798)})
+            _manger.createEntityFromUrlWithProperties(rcs, {"x": imagePointInWorldCoordinates.x-40, "y": imagePointInWorldCoordinates.y-50, "rotation": car.rotation+270,"entityId":getRandomFloat(789,4561)})
         }
         if(nums ===3){
-            _manger.createEntityFromUrlWithProperties(rcs, {"x": imagePointInWorldCoordinates.x-90, "y": imagePointInWorldCoordinates.y-50, "rotation": car.rotation+270})
-            _manger.createEntityFromUrlWithProperties(rcs, {"x": imagePointInWorldCoordinates.x-65, "y": imagePointInWorldCoordinates.y-50, "rotation": car.rotation+270})
-            _manger.createEntityFromUrlWithProperties(rcs, {"x": imagePointInWorldCoordinates.x-40, "y": imagePointInWorldCoordinates.y-50, "rotation": car.rotation+270})
+            _manger.createEntityFromUrlWithProperties(rcs, {"x": imagePointInWorldCoordinates.x-90, "y": imagePointInWorldCoordinates.y-50, "rotation": car.rotation+270,"entityId":getRandomFloat(456,4561)})
+            _manger.createEntityFromUrlWithProperties(rcs, {"x": imagePointInWorldCoordinates.x-65, "y": imagePointInWorldCoordinates.y-50, "rotation": car.rotation+270,"entityId":getRandomFloat(1,1324)})
+            _manger.createEntityFromUrlWithProperties(rcs, {"x": imagePointInWorldCoordinates.x-40, "y": imagePointInWorldCoordinates.y-50, "rotation": car.rotation+270,"entityId":getRandomFloat(1,2354)})
         }
     }
 
     onHelthChanged: {
-        console.log("----------------------------------------------->",car.helth);
+//        console.log("----------------------------------------------->",car.helth);
         if(car.helth>100){
             car.helth=100
         }
 
         if(car.helth <= 0){
             gameFail()
-            //            image.visible=false
+            image.visible=false
         }
     }
 

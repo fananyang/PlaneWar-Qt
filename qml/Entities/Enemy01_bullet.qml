@@ -4,7 +4,11 @@ import Felgo 4.0
 
 EntityBase {
     id: entity
-    entityType: "Hero_bullet"
+    entityType: "Enemy_bullet"
+
+    property alias image:_image
+    property alias collider:boxCollider
+
 
     Component.onCompleted: {
 //        console.debug("Rocket.onCompleted, width:", width);
@@ -22,11 +26,13 @@ EntityBase {
         width: 50
         height: 20
 
+//        collisionTestingOnlyMode: true
+
         anchors.centerIn: parent
 
         density: 0.003
         friction: 0.4
-        restitution: 0.5
+//        restitution: 0.5
         body.bullet: true
         // we prevent the physics engine from applying rotation to the rocket, because we will do it ourselves
         body.fixedRotation: true
@@ -41,35 +47,33 @@ EntityBase {
                                     // get the entityType of the colliding entity
                                     var collidingType = otherEntity.entityType
 
-                                    //      if(collidingType === "car" ||
-                                    //              collidingType === "rocket") {
-                                    //          entity.removeEntity()
-                                    //          return
-                                    //      }
-
                                     if(collidingType === "Wall") {
-                                        image.visible=false;
+                                        _image.visible=false;
                                         entity.removeEntity();
                                     }
-                                    if(collidingType ==="Enemy"){
-                                        image.visible=false;
-//                                        otherEntity.health-=8;
+                                    if(collidingType ==="Plane"){
+                                        _image.visible=false;
                                         entity.removeEntity();
                                     }
-                                    if(collidingType === "Enemy_bullet"){
-                                        image.visible=false;
+                                    if(collidingType ==="Helth_props"){
+                                        _image.visible=false;
                                         entity.removeEntity();
                                     }
-                                    if(collidingType === "Hero_bullet"){
-                                        image.visible=false;
+                                    if(collidingType ==="Defense_props"){
+                                        _image.visible=false;
                                         entity.removeEntity();
                                     }
-                                    if(collidingType === "Helth_props"){
-                                        image.visible=false;
+                                    if(collidingType  === "Hero_bullet"){
+                                        _image.visible=false;
+                                        entity.removeEntity();
+
+                                    }
+                                    if(collidingType ==="Enemy_bullet"){
+                                        _image.visible=false;
                                         entity.removeEntity();
                                     }
-                                    if(collidingType === "Boss"){
-                                        image.visible=false;
+                                    if(collidingType ==="Boss_bullet"){
+                                        _image.visible=false;
                                         entity.removeEntity();
                                     }
                                     if(collidingType ==="Rocket"){
@@ -81,44 +85,27 @@ EntityBase {
                                     if(collidingType ==="Rocket_props"){
                                         entity.removeEntity()
                                     }
-                                    if(collidingType ==="Defense_props"){
-                                        entity.removeEntity()
-                                    }
-
-                                    //can't hit the same wall twice, but onBeginContact called again after rotation has changed
 
 
-                                    //apply law of reflection, all calculations in degrees
-                                    var normalAngle = 180 / Math.PI * Math.atan2(contactNormal.y, contactNormal.x)
-                                    var angleDiff = normalAngle - entity.rotation
-                                    var newAngle = entity.rotation + 2 * angleDiff + 180
-
-                                    // manually set the entity rotation, because it is the target and its rotation will be used for the physics body
-                                    entity.rotation = newAngle
-
-                                    // it's important to clear the old velocity before applying the impulse, otherwise the rocket would get faster every time it collides with a wall!
-                                    boxCollider.body.linearVelocity = Qt.point(0,0)
-
-                                   // applyForwardImpulse();
                                 }
     }
 
     Image {
-        id: image
-//        source: Qt.resolvedUrl("../../assets/img/blue_bullet.png")
-//        source: Qt.resolvedUrl("../../assets/img/rocket2.png")
-        source:"qrc:/assets/images/rocket2.png"
+        id: _image
+//        source: Qt.resolvedUrl("../../assets/img/enemy_bullet.png")
+        source:"qrc:/assets/images/enemyAmmo01.png"
         anchors.centerIn: parent
-        width:45
+        width: 15
         height:15
     }
 
     function applyForwardImpulse() {
-        var power = 1850            //bullet speed
-        var rad = entity.rotation / 180 * Math.PI
+        var power = 1000    //bullet speed
+        var rad = entity.rotation / 180 * Math.PI   //The angle of rotation of the bullet
 
         //can't use body.toWorldVector() because the rotation is not instantly
         var localForward = Qt.point(power * Math.cos(rad), power * Math.sin(rad))
         boxCollider.body.applyLinearImpulse(localForward, boxCollider.body.getWorldCenter())
     }
 }
+

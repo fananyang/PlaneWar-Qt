@@ -8,7 +8,7 @@ Scene {
     id: scene
     property int selectMap: 1
     width: 960
-    height: 1080
+    height: 1300
 
     MultiResolutionImage {
         id: bg;
