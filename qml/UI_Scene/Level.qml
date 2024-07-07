@@ -104,7 +104,7 @@ Item
     }
     Timer{
         id:timer4
-        interval: 12000
+        interval: 17000
         repeat: true
         running: _alltime.running
         onTriggered: {
@@ -114,7 +114,7 @@ Item
     }
     Timer{
         id:timer5
-        interval: 11000
+        interval: 15000
         repeat: true
         running: _alltime.running
         onTriggered: {
@@ -124,7 +124,7 @@ Item
     }
     Timer{
         id:timer6
-        interval: 6500
+        interval: 6580
         repeat: true
         running: _alltime.running
         onTriggered: {
@@ -135,7 +135,7 @@ Item
 
     Timer{
         id:enemytimer2
-        interval: 9000
+        interval: 9520
         repeat: true
         running: _alltime.running
         onTriggered: {
@@ -168,7 +168,7 @@ Item
 
 
     onScoreChanged: {
-        if(score>=100){
+        if(score>=50){
 //            gameWon()
             _bosstimer.running=true
         }
@@ -275,7 +275,7 @@ Item
             height: 18
             radius: 200
             anchors.verticalCenter: parent.verticalCenter
-            width: _boss.health/1000 * 650
+            width: _boss.health/10000 * 650
             SequentialAnimation on width {
                 running: _boss.visible
                 PropertyAnimation {

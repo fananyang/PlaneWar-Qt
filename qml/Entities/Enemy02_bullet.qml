@@ -4,7 +4,7 @@ import Felgo 4.0
 
 EntityBase {
     id: entity
-    entityType: "Enemy_bullet"
+    entityType: "Enemy02_bullet"
 
     property alias image:_image
     property alias collider:boxCollider
@@ -68,7 +68,7 @@ EntityBase {
                                         entity.removeEntity();
 
                                     }
-                                    if(collidingType ==="Enemy_bullet"){
+                                    if(collidingType ==="Enemy02_bullet"){
                                         _image.visible=false;
                                         entity.removeEntity();
                                     }

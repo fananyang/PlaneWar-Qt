@@ -126,9 +126,23 @@ EntityBase {
                                     }
                                     if(collidingType ==="Boss_bullet"){
                                         if(defenses >0){
+                                            defenses-=25;
+                                        }else{
+                                            car.helth -=20;
+                                        }
+                                    }
+                                    if(collidingType ==="Enemy02_bullet"){
+                                        if(defenses >0){
                                             defenses-=15;
                                         }else{
-                                            car.helth -=10;
+                                            car.helth -=12;
+                                        }
+                                    }
+                                    if(collidingType ==="Enemy01_bullet"){
+                                        if(defenses >0){
+                                            defenses-=10;
+                                        }else{
+                                            car.helth -=8;
                                         }
                                     }
                                     if(collidingType ==="Rocket_props"){
@@ -239,7 +253,7 @@ EntityBase {
     //     }
     Timer {
         id: _m1
-        interval: 295// a new target(=monster) is spawned every second
+        interval: 295//a durtion when stops music
         running: false
         onTriggered: {
             background_music.stop();

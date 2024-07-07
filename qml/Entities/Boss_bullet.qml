@@ -29,7 +29,7 @@ EntityBase {
     //    restitution: 0.5  rebound
         body.bullet: true
         // we prevent the physics engine from applying rotation to the rocket, because we will do it ourselves
-        body.fixedRotation: true
+//        body.fixedRotation: true
 
         property var lastWall: null
 
@@ -82,13 +82,26 @@ EntityBase {
         height:25
     }
 
+//    function applyForwardImpulse() {
+//        var power = 1000    //bullet speed
+//        var rad = entity.rotation / 180 * Math.PI
+
+//        //can't use body.toWorldVector() because the rotation is not instantly
+//        var localForward = Qt.point(power * Math.cos(rad), power * Math.sin(rad))
+//        boxCollider.body.applyLinearImpulse(localForward, boxCollider.body.getWorldCenter())
+//    }
+
     function applyForwardImpulse() {
-        var power = 1000    //bullet speed
+        var power = 1000    // bullet speed
         var rad = entity.rotation / 180 * Math.PI
 
-        //can't use body.toWorldVector() because the rotation is not instantly
+        // Apply forward linear impulse to move the bullet
         var localForward = Qt.point(power * Math.cos(rad), power * Math.sin(rad))
         boxCollider.body.applyLinearImpulse(localForward, boxCollider.body.getWorldCenter())
+
+        // Apply clockwise rotational torque to the bullet
+        var torque = -1000000 // Negative value for clockwise rotation
+        boxCollider.body.applyTorque(torque)
     }
 }
 

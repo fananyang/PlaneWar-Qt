@@ -24,6 +24,7 @@ Enemy{
         easing.type: Easing.InOutQuad
     }
 
+
     Timer {
         id: _bossposition
         interval: 1700 // update boss position per 1.8s

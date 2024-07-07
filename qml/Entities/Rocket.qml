@@ -56,17 +56,32 @@ EntityBase {
 //                                        otherEntity.health-=8;
                                         entity.removeEntity();
                                     }
+                                    if(collidingType ==="Enemy01"){
+                                        image.visible=false;
+//                                        otherEntity.health-=8;
+                                        entity.removeEntity();
+                                    }
+                                    if(collidingType ==="Enemy02"){
+                                        image.visible=false;
+//                                        otherEntity.health-=8;
+                                        entity.removeEntity();
+                                    }
+                                    if(collidingType ==="Enemy03"){
+                                        image.visible=false;
+//                                        otherEntity.health-=8;
+                                        entity.removeEntity();
+                                    }
                                     if(collidingType === "Enemy_bullet"){
                                         image.visible=false;
                                         entity.removeEntity();
                                     }
                                     if(collidingType === "Defense_props"){
-                                        image.visible=false;
-                                        entity.removeEntity();
+//                                        image.visible=false;
+//                                        entity.removeEntity();
                                     }
                                     if(collidingType === "Helth_props"){
-                                        image.visible=false;
-                                        entity.removeEntity();
+//                                        image.visible=false;
+//                                        entity.removeEntity();
                                     }
                                     if(collidingType === "Boss"){
                                         image.visible=false;
@@ -76,10 +91,10 @@ EntityBase {
                                         entity.removeEntity();
                                     }
                                     if(collidingType ==="Hero_bullet_props"){
-                                        entity.removeEntity()
+//                                        entity.removeEntity()
                                     }
                                     if(collidingType ==="Rocket_props"){
-                                        entity.removeEntity()
+//                                        entity.removeEntity()
                                     }
 
                                     //can't hit the same wall twice, but onBeginContact called again after rotation has changed
@@ -116,5 +131,17 @@ EntityBase {
         //can't use body.toWorldVector() because the rotation is not instantly
         var localForward = Qt.point(power * Math.cos(rad), power * Math.sin(rad))
         boxCollider.body.applyLinearImpulse(localForward, boxCollider.body.getWorldCenter())
+    }
+
+    NumberAnimation on y {
+        //from: -monsterImage.height // move the monster to the left side of the screen
+        id: move_y
+        //            from: 0
+        to: -5000 // start at the right side
+        duration: 7500
+        //duration:getRandomFloat(4000, 10000) // vary animation duration between 2-4 seconds for the 480 px scene width
+        onStopped: {
+            // changeToGameOverScene(false)
+        }
     }
 }

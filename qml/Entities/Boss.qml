@@ -12,7 +12,7 @@ EntityBase {
     entityId: "Boss"
     entityType: "Boss"
 
-    property int health :1000
+    property int health :2000
 
     property int score : 100
     property int boom:100
@@ -46,7 +46,7 @@ EntityBase {
                                    var collderbody = other.getBody();
                                    var collidedEntity =collderbody.target;
 
-//                                   console.log("collided with entity:",collidedEntity.entityType);
+                                   //                                   console.log("collided with entity:",collidedEntity.entityType);
 
                                    //The collision rules for the enemy aircraft are as follows: when the enemy aircraft is hit, it will disappear or Health reduction .
 
@@ -82,11 +82,13 @@ EntityBase {
             background_music.play();
             _m1.running=true
             t.running=false
+            t.stop();
             _bossimage.visible=false
             _boomexp.visible=true
             _bossposition.running=false
-            startX=endX
-            t1.running;
+            startX=endX;
+            t2.stop();
+            t1.start();
         }
         if(health <= 0){
             gameWon()
@@ -133,10 +135,10 @@ EntityBase {
         repeat: true
         running: false
         onTriggered: {
-//            console.log(startX,"------------------------------------------------->",endX);
+            //            console.log(startX,"------------------------------------------------->",endX);
             startX =_boss.endX
             endX=getRandomFloat(50,550);
-//            console.log(startX,"------------------------------------------------->>>",endX);
+            //            console.log(startX,"------------------------------------------------->>>",endX);
 
         }
     }
@@ -147,47 +149,63 @@ EntityBase {
         repeat: true
         running: false
         onTriggered: {
-//            console.log("boss fire")
+            //            console.log("boss fire")
             enemyfire();
+            if(!t2.running){
+                t2.start();
+            }
+        }
+    }
+
+    Timer {
+        id: t2
+        interval: 200 // a new target(=monster) is spawned every second
+        repeat: true
+        running: false
+        onTriggered: {
+            fire02();
         }
     }
 
 
-//    function enemyfire(){
-//        var imagePointInWorldCoordinates = mapToItem(level,_bossimage.x, _bossimage.y);
+    //    function enemyfire(){
+    //        var imagePointInWorldCoordinates = mapToItem(level,_bossimage.x, _bossimage.y);
 
-//        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("Boss_bullet.qml"), {"x": imagePointInWorldCoordinates.x+80, "y": imagePointInWorldCoordinates.y+160, "rotation": _boss.rotation+95});
+    //        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("Boss_bullet.qml"), {"x": imagePointInWorldCoordinates.x+80, "y": imagePointInWorldCoordinates.y+160, "rotation": _boss.rotation+95});
 
-//    }
+    //    }
 
     function enemyfire() {
-            var imagePointInWorldCoordinates = mapToItem(level, _bossimage.x, _bossimage.y);
-            var bulletCount = 10;
-            var angleStep = 360 / bulletCount;
+        var imagePointInWorldCoordinates = mapToItem(level, _bossimage.x, _bossimage.y);
+        var bulletCount = 10;
+        var angleStep = 360 / bulletCount;
 
 
-            for (var i = 0; i < bulletCount; i++) {
-                var currentAngle = _boss.rotation - angleStep * i;
-                var radians = currentAngle * Math.PI / 180;
-                var bulletX = imagePointInWorldCoordinates.x +  + Math.cos(radians) * 80;
-                var bulletY = imagePointInWorldCoordinates.y +  + Math.sin(radians) * 80;
+        for (var i = 0; i < bulletCount; i++) {
+            var currentAngle = _boss.rotation - angleStep * i;
+            var radians = currentAngle * Math.PI / 180;
+            var bulletX = imagePointInWorldCoordinates.x +  + Math.cos(radians) * 80;
+            var bulletY = imagePointInWorldCoordinates.y +  + Math.sin(radians) * 80;
 
-                var bullet = _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("Boss_bullet.qml"), {
-                    "x": bulletX+50+45,
-                    "y": bulletY+50+25,
-                    "rotation": currentAngle
-                    ,"entityId":getRandomFloat(4,500)
-                });
+            var bullet = _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("Boss_bullet.qml"), {
+                                                                       "x": bulletX+50+45,
+                                                                       "y": bulletY+50+25,
+                                                                       "rotation": currentAngle
+                                                                       ,"entityId":getRandomFloat(4,500)
+                                                                   });
 
 
-
-            }
         }
+
+    }
+
+
 
     Component.onCompleted:{
         if(_boss.visible){
             _bossposition.start();
             t.start();
+
         }
     }
 
@@ -202,6 +220,23 @@ EntityBase {
     }
 
 
+    property int r:0
+
+    function fire02(){
+
+        r=(r+30)%360;
+        //        console.log("boss 02 fire")
+        _manger.createEntityFromUrlWithProperties(Qt.resolvedUrl("Enemy02_bullet.qml"), {
+                                                      "x": _boss.x+50+45,
+                                                      "y": _boss.y+50+25,
+                                                      "rotation": r
+                                                      ,"entityId":getRandomFloat(4,500)
+                                                  });
+
+    }
+
+
+
     SpriteSequence {
         id: _boomexp
         width: 90
@@ -212,35 +247,35 @@ EntityBase {
 
         Sprite {
             name: "bomb1"
-//            source: "../../assets/img/boom1.png"
+            //            source: "../../assets/img/boom1.png"
             source: "qrc:/assets/images/boom1.png"
             to: { "bomb2": 1 }
             frameDuration: 100
         }
         Sprite {
             name: "bomb2"
-//            source: "../../assets/img/boom2.png"
+            //            source: "../../assets/img/boom2.png"
             source: "qrc:/assets/images/boom2.png"
             to: { "bomb3": 1 }
             frameDuration: 150
         }
         Sprite {
             name: "bomb3"
-//            source: "../../assets/img/boom3.png"
+            //            source: "../../assets/img/boom3.png"
             source: "qrc:/assets/images/boom3.png"
             to: { "bomb4": 1 }
             frameDuration: 200
         }
         Sprite {
             name: "bomb4"
-//            source: "../../assets/img/boom4.png"
+            //            source: "../../assets/img/boom4.png"
             source: "qrc:/assets/images/boom4.png"
             to: { "bomb5": 1 }
             frameDuration: 150
         }
         Sprite {
             name: "bomb5"
-//            source: "../../assets/img/bomm0.png"
+            //            source: "../../assets/img/bomm0.png"
             source: "qrc:/assets/images/bomm0.png"
             to: { "bomb1": 1 }
             frameDuration: 100
@@ -249,14 +284,14 @@ EntityBase {
     }
     BackgroundMusic {
         id:background_music
-//        loop:Infinite
-//        source: Qt.resolvedUrl("../../assets/wav/exploBig.wav")
-         source: "qrc:/assets/wav/exploBig.wav"
+        //        loop:Infinite
+        //        source: Qt.resolvedUrl("../../assets/wav/exploBig.wav")
+        source: "qrc:/assets/wav/exploBig.wav"
     }
 
-//     Component.onCompleted:{
-//         background_music.play();
-//     }
+    //     Component.onCompleted:{
+    //         background_music.play();
+    //     }
     Timer {
         id: _m1
         interval: 1000 // a new target(=monster) is spawned every second
