@@ -275,7 +275,7 @@ Item
             height: 18
             radius: 200
             anchors.verticalCenter: parent.verticalCenter
-            width: _boss.health/10000 * 650
+            width: _boss.health/2000 * 650
             SequentialAnimation on width {
                 running: _boss.visible
                 PropertyAnimation {
